@@ -1,0 +1,70 @@
+﻿@model FOMOWizard.Models.Deployment
+
+@{
+    ViewData["Title"] = "Create Deployment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="PageTitle">Add Deployment Record</h4>
+<hr />
+<form asp-action="Create">
+    <fieldset class="FormContent">
+        <div class="form-group row">
+            <label asp-for="DeploymentType" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <select asp-for="DeploymentType" asp-items="@ViewData["DeploymentType"] as List<SelectListItem>" class="form-control"> </select>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label asp-for="Gender"
+                   class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <div class="form-group form-check-inline">
+                    <label class="col-form-label">
+                        <input asp-for="Gender" type="radio" value="M" checked class="form-check-input" />
+                        <span>Male</span>
+                    </label>
+                    <label class="col-form-label">
+                        <input asp-for="Gender" type="radio" value="F" class="form-check-input" />
+                        <span>Female</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="DOB" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="DOB" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Email" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Salary" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="Salary" class="form-control" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="checkbox col-sm-9 offset-sm-3">
+                <input asp-for="IsFullTime" />
+                <label asp-for="IsFullTime" class="col-form-label"> </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-9 offset-sm-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+        <div> <a asp-action="Index">Back to List</a> </div>
+    </fieldset>
+</form>

@@ -4,11 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using FOMOWizard.DAL;
+using FOMOWizard.Models;
 
 namespace FOMOWizard.Controllers
 {
     public class HomeController : Controller
     {
+        private HomeDAL homeContext = new HomeDAL();
+        StaffDAL staffContext = new StaffDAL();
+        Staff staff = new Staff();
+
         public IActionResult Index()
         {
             return View();
@@ -20,16 +26,27 @@ namespace FOMOWizard.Controllers
             // Read inputs from textboxes // Email address converted to lowercase 
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
-
-            if (loginID == "abc@gmail.com" && password == "pass1234")
+            Staff staff = staffContext.GetStaff(loginID);
+            if (homeContext.IsEmailExist(loginID, password))
             {
-                // Store Login ID in session with the key as “LoginID” 
-                HttpContext.Session.SetString("LoginID", loginID);
-                // Store user role “Staff” in session with the key as “Role” 
-                HttpContext.Session.SetString("Role", "Staff");
-                // Redirect user to the "StaffMain" view through an action 
-                return RedirectToAction("StaffMain");
+                if (loginID == staff.Email.ToLower() && password == staff.Password)
+                {
+                    // Store Login ID in session with the key as “LoginID” 
+                    HttpContext.Session.SetString("LoginID", loginID);
+                    // Store user role “Staff” in session with the key as “Role” 
+                    HttpContext.Session.SetString("Role", "Staff");
+                    // Redirect user to the "StaffMain" view through an action 
+                    return RedirectToAction("StaffMain");
+                }
+
+                else
+                {
+                    TempData["Message"] = "Invalid Login";
+                    return RedirectToAction("Index");
+                }
+
             }
+
             else
             {
                 // Store an error message in TempData for display at the index view 
