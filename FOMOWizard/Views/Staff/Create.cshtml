@@ -1,70 +1,118 @@
 ﻿@model FOMOWizard.Models.Deployment
 
 @{
-    ViewData["Title"] = "Create Deployment";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .scheme {
+        margin-left: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-weight:bold;
+        width:100px;
+    }
 
-<h4 class="PageTitle">Add Deployment Record</h4>
-<hr />
+</style>
+
 <form asp-action="Create">
     <fieldset class="FormContent">
         <div class="form-group row">
             <label asp-for="DeploymentType" class="col-sm-3 col-form-label"></label>
             <div class="col-sm-9 col-md-5">
-                <select asp-for="DeploymentType" asp-items="@ViewData["DeploymentType"] as List<SelectListItem>" class="form-control"> </select>
+                <select asp-for="DeploymentType" asp-items="@ViewData["DeploymentType"] as List<SelectListItem>"
+                        class="form-control"></select>
             </div>
         </div>
-        
         <div class="form-group row">
-            <label asp-for="Gender"
-                   class="col-sm-3 col-form-label"></label>
+            <label asp-for="MID" class="col-sm-3 col-form-label"></label>
             <div class="col-sm-9 col-md-5">
-                <div class="form-group form-check-inline">
-                    <label class="col-form-label">
-                        <input asp-for="Gender" type="radio" value="M" checked class="form-check-input" />
-                        <span>Male</span>
+                <input asp-for="MID" class="form-control" />
+                <span asp-validation-for="MID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="TID" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="TID" class="form-control" />
+                <span asp-validation-for="TID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Schemes" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-1">
+                <div class="">
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="ActiveSG" checked class="form-check-input" />
+                        <span>ActiveSG</span>
                     </label>
-                    <label class="col-form-label">
-                        <input asp-for="Gender" type="radio" value="F" class="form-check-input" />
-                        <span>Female</span>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="AliPay" class="form-check-input" />
+                        <span>AliPay</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="Singtel Dash" class="form-check-input" />
+                        <span>Singtel Dash</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="EZ-Link" class="form-check-input" />
+                        <span>EZ-Link</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="GrabPay" class="form-check-input" />
+                        <span>GrabPay</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="RazerPay" class="form-check-input" />
+                        <span>RazerPay</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="RemoPay" class="form-check-input" />
+                        <span>RemoPay</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="UnionPay" class="form-check-input" />
+                        <span>UnionPay</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="WeChat" class="form-check-input" />
+                        <span>WeChat</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="PayNOW" class="form-check-input" />
+                        <span>PayNOW</span>
+                    </label>
+                    <label class="scheme">
+                        <input asp-for="Schemes" type="checkbox" value="NETSPay" class="form-check-input" />
+                        <span>NETSPay</span>
                     </label>
                 </div>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="DOB" class="col-sm-3 col-form-label"></label>
+            <label asp-for="MerchantType" class="col-sm-3 col-form-label"></label>
             <div class="col-sm-9 col-md-5">
-                <input asp-for="DOB" class="form-control" />
-                <span asp-validation-for="DOB" class="text-danger"></span>
+                <select asp-for="MerchantType" asp-items="@ViewData["MerchantType"] as List<SelectListItem>"
+                        class="form-control"></select>
             </div>
         </div>
-
         <div class="form-group row">
-            <label asp-for="Email" class="col-sm-3 col-form-label"></label>
+            <label asp-for="SGQRID" class="col-sm-3 col-form-label"></label>
             <div class="col-sm-9 col-md-5">
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="SGQRID" class="form-control" />
+                <span asp-validation-for="SGQRID" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="Salary" class="col-sm-3 col-form-label"></label>
+            <label asp-for="SGQRVersion" class="col-sm-3 col-form-label"></label>
             <div class="col-sm-9 col-md-5">
-                <input asp-for="Salary" class="form-control" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
+                <input asp-for="SGQRVersion" class="form-control" />
+                <span asp-validation-for="SGQRVersion" class="text-danger"></span>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="checkbox col-sm-9 offset-sm-3">
-                <input asp-for="IsFullTime" />
-                <label asp-for="IsFullTime" class="col-form-label"> </label>
-            </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
         </div>
-        <div class="form-group row">
-            <div class="col-sm-9 offset-sm-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </div>
-        <div> <a asp-action="Index">Back to List</a> </div>
+            <a asp-action="UploadPhoto" asp-route-id="@Model.StaffID">Upload Photo</a>
     </fieldset>
 </form>

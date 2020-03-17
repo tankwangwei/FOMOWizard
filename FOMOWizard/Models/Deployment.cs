@@ -9,6 +9,9 @@ namespace FOMOWizard.Models
 {
     public class Deployment
     {
+        [Display(Name = "ID")]
+        public int StaffID { get; set; }
+
         [Display(Name = "Deployment Type")]
         [Required]
         public string DeploymentType { get; set; }

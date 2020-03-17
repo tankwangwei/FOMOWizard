@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FOMOWizard.DAL;
 using FOMOWizard.Models;
+using System.IO;
 
 namespace FOMOWizard.Controllers
 {
@@ -38,7 +39,7 @@ namespace FOMOWizard.Controllers
         {
             // Stop accessing the action if not logged in 
             // or account not in the "Staff" role 
-            if ((HttpContext.Session.GetString("Role") == null) || 
+            if ((HttpContext.Session.GetString("Role") == null) ||
                 (HttpContext.Session.GetString("Role") != "Staff"))
             {
                 return RedirectToAction("Index", "Home");
@@ -54,7 +55,7 @@ namespace FOMOWizard.Controllers
             deploymenttype.Add(new SelectListItem { Value = "NewDeployment", Text = "New Deployment" });
             deploymenttype.Add(new SelectListItem { Value = "ReDeployment", Text = "Re-Deployment" });
             deploymenttype.Add(new SelectListItem { Value = "ReTraining", Text = "Re-Training" });
-   
+
             return deploymenttype;
         }
         private List<SelectListItem> GetMerchantType()
@@ -67,7 +68,7 @@ namespace FOMOWizard.Controllers
             return merchanttype;
         }
 
-    
+
 
         // POST: Staff/Create
         [HttpPost]
