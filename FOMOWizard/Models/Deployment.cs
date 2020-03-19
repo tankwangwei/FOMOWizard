@@ -18,12 +18,13 @@ namespace FOMOWizard.Models
 
         [Display(Name = "MID")]
         [Required]
-        [StringLength(15, ErrorMessage = "Cannot exceed 15 characters")]
+        [RegularExpression("^[0-9]{15}$", ErrorMessage = "Please enter only 15 numbers")]
         public string MID { get; set; }
 
         [Display(Name = "TID")]
         [Required]
-        [StringLength(8, ErrorMessage = "Cannot exceed 8 characters")]
+        [RegularExpression("^[0-9]{8}$", ErrorMessage = "Please enter 8 numbers only")]
+
         public string TID { get; set; }
 
         [Display(Name = "Schemes")]

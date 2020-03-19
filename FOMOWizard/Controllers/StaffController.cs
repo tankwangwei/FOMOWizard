@@ -80,7 +80,7 @@ namespace FOMOWizard.Controllers
                 //Add staff record to database 
                 deployment.DeploymentID = staffContext.Add(deployment);
                 //Redirect user to Staff/Index view 
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
             else
             {
