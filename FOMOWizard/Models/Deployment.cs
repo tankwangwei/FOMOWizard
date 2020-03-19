@@ -10,7 +10,7 @@ namespace FOMOWizard.Models
     public class Deployment
     {
         [Display(Name = "ID")]
-        public int StaffID { get; set; }
+        public int DeploymentID { get; set; }
 
         [Display(Name = "Deployment Type")]
         [Required]
@@ -18,16 +18,17 @@ namespace FOMOWizard.Models
 
         [Display(Name = "MID")]
         [Required]
-        [StringLength(15, ErrorMessage = "Cannot exceed 15 characters")]
-        public int MID { get; set; }
+        [RegularExpression("^[0-9]{15}$", ErrorMessage = "Please enter only 15 numbers")]
+        public string MID { get; set; }
 
         [Display(Name = "TID")]
         [Required]
-        [StringLength(8, ErrorMessage = "Cannot exceed 8 characters")]
-        public int TID { get; set; }
+        [RegularExpression("^[0-9]{8}$", ErrorMessage = "Please enter 8 numbers only")]
+
+        public string TID { get; set; }
 
         [Display(Name = "Schemes")]
-        [Required]
+        [Required(ErrorMessage ="Please select one of the scheme")]
         public string Schemes { get; set; }
 
         [Display(Name = "Merchant Type")]
@@ -49,7 +50,6 @@ namespace FOMOWizard.Models
         public IFormFile fileToUpload { get; set; }
 
         [Display(Name = "Remarks")]
-        [Required]
         public string Remarks { get; set; }
 
     }

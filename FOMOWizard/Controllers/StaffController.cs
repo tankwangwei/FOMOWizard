@@ -73,17 +73,19 @@ namespace FOMOWizard.Controllers
         // POST: Staff/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Deployment deployment)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                //Add staff record to database 
+                deployment.DeploymentID = staffContext.Add(deployment);
+                //Redirect user to Staff/Index view 
+                return RedirectToAction("Create");
             }
-            catch
+            else
             {
-                return View();
+                //Input validation fails, return to the Create view //to display error message
+                return View(deployment);
             }
         }
 
@@ -132,5 +134,45 @@ namespace FOMOWizard.Controllers
                 return View();
             }
         }
+
+        //public ActionResult UploadPhoto (int id)
+        //{
+        //    // Stop accessing the action if not logged in // or account not in the "Staff" role 
+        //    if ((HttpContext.Session.GetString("Role") == null) || 
+        //        (HttpContext.Session.GetString("Role") != "Staff"))
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    Staff staff = staffContext.GetStaff;
+            
+        //    return View();
+        //}
+        //[HttpPost] [ValidateAntiForgeryToken]
+        //public async Task<IActionResult> UploadPhoto(StaffViewModel staffVM) {
+        //    if (staffVM.fileToUpload != null && staffVM.fileToUpload.Length > 0)
+        //    {
+        //        try
+        //        { // Find the filename extension of the file to be uploaded. 
+        //            string fileExt = Path.GetExtension( staffVM.fileToUpload.FileName); // Rename the uploaded file with the staff’s name. 
+        //            string uploadedFile = staffVM.Name + fileExt; // Get the complete path to the images folder in server 
+        //            string savePath = Path.Combine( Directory.GetCurrentDirectory(), "wwwroot\\images", uploadedFile); // Upload the file to server 
+        //            using (var fileSteam = new FileStream(savePath, FileMode.Create))
+        //            {
+        //                await staffVM.fileToUpload.CopyToAsync(fileSteam);
+        //            }
+        //            staffVM.Photo = uploadedFile; ViewData["Message"] = "File uploaded successfully.";
+        //        }
+        //        catch (IOException)
+        //        { //File IO error, could be due to access rights denied 
+        //            ViewData["Message"] = "File uploading fail!";
+        //        }
+        //        catch (Exception ex) //Other type of error 
+        //        {
+        //            ViewData["Message"] = ex.Message;
+        //        }
+        //    } return View(staffVM);
+        //}
     }
+
 }
+
