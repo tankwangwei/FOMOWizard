@@ -43,7 +43,7 @@
             <div class="col-sm-9 col-md-1">
                 <div class="">
                     <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="ActiveSG" checked class="form-check-input" />
+                        <input asp-for="Schemes" type="checkbox" value="ActiveSG" class="form-check-input" />
                         <span>ActiveSG</span>
                     </label>
                     <label class="scheme">
@@ -110,9 +110,39 @@
                 <span asp-validation-for="SGQRVersion" class="text-danger"></span>
             </div>
         </div>
+        <div class="form-group row">
+            <label asp-for="Remarks" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="DeploymentPhoto" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="DeploymentPhoto" type="file" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="PhotoBefore" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="PhotoBefore" type="file" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="PhotoAfter" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="PhotoAfter" type="file" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-9 offset-sm-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
         <div>
             <a asp-action="Index">Back to List</a>
         </div>
-            <a asp-action="UploadPhoto" asp-route-id="@Model.StaffID">Upload Photo</a>
+        @*<a asp-action="UploadPhoto" asp-route-id="@Model.StaffID">Upload Photo</a>*@
     </fieldset>
 </form>

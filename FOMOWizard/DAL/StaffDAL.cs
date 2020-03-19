@@ -27,6 +27,7 @@ namespace FOMOWizard.DAL
 
             //Instantiate a SqlConnection object with the Connection String read. 
             conn = new SqlConnection(strConn);
+            
         }
 
         public List<Staff> GetAllStaff()
@@ -101,6 +102,36 @@ namespace FOMOWizard.DAL
                 };
             }
             return staff;
+        }
+
+        public int Add(Deployment deployment)
+        {
+            //Instantiate a SqlCommand object,supply it with an INSERT SQL statement //which will return the auto-generated StaffID after insertion, //and the connection object for connecting to the database. 
+            SqlCommand cmd = new SqlCommand
+                ("INSERT INTO Deployment (DeploymentType, MID, TID, Schemes, MerchantType, SGQRID, SGQRVer, DeploymentPhoto, PhotoBefore, PhotoAfter) " + "OUTPUT INSERTED.DeploymentID " + "VALUES(@deploymenttype, @mid, @tid, @schemes, @merchanttype, @sgqrid, @sgqrver, @deploymentphoto, @photobefore, @photoafter)", conn);
+            //Define the parameters used in SQL statement, value for each parameter //is retrieved from respective class's property. 
+            cmd.Parameters.AddWithValue("@deploymenttype", deployment.DeploymentType);
+            cmd.Parameters.AddWithValue("@mid", deployment.MID);    
+            cmd.Parameters.AddWithValue("@tid", deployment.TID);
+            cmd.Parameters.AddWithValue("@schemes", deployment.Schemes);
+            cmd.Parameters.AddWithValue("@merchanttype", deployment.MerchantType);
+            cmd.Parameters.AddWithValue("@sgqrid", deployment.SGQRID);
+            cmd.Parameters.AddWithValue("@sgqrver", deployment.SGQRVersion);
+            cmd.Parameters.AddWithValue("@deploymentphoto", deployment.DeploymentPhoto);
+            cmd.Parameters.AddWithValue("@photobefore", deployment.PhotoBefore);
+            cmd.Parameters.AddWithValue("@photoafter", deployment.PhotoAfter);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //ExecuteScalar is used to retrieve the auto-generated //StaffID after executing the INSERT SQL statement 
+            deployment.DeploymentID = (int)cmd.ExecuteScalar();
+
+            //A connection should be closed after operations. 
+            conn.Close();
+
+            //Return id when no error occurs. 
+            return deployment.DeploymentID;
         }
     }
 }
