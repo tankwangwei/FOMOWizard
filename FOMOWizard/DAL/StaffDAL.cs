@@ -115,7 +115,7 @@ namespace FOMOWizard.DAL
             cmd.Parameters.AddWithValue("@tid", deployment.TID);
             cmd.Parameters.AddWithValue("@schemes", deployment.Schemes);
             cmd.Parameters.AddWithValue("@merchanttype", deployment.MerchantType);
-            cmd.Parameters.AddWithValue("@sgqrid", deployment.SGQRID);
+            cmd.Parameters.AddWithValue("@sgqrid", deployment.SGQRID); 
             cmd.Parameters.AddWithValue("@sgqrver", deployment.SGQRVersion);
             cmd.Parameters.AddWithValue("@deploymentphoto", deployment.DeploymentPhoto);
             cmd.Parameters.AddWithValue("@photobefore", deployment.PhotoBefore);
@@ -131,6 +131,86 @@ namespace FOMOWizard.DAL
 
             //Return id when no error occurs. 
             return (deployment.DeploymentID);
+        }
+
+        public List<Deployment> GetAllDeployment()
+        {
+            //Instantiate a SqlCommand object, supply it with a SELECT SQL statement that operates against the database, and the connection object for connecting to the database
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Deployment ORDER BY DeploymentID", conn);
+            //Instantiate a DataAdapter object and pass the SqlCommand object created as parameter
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //Create a DataSet object to contain records get from database 
+            DataSet result = new DataSet();
+            //Open a database connection 
+            conn.Open();    
+            //Use DataAdapter, which execute the SELECT SQL through its SqlCommand object to fetch data to a table "StaffDetails" in DataSet "result" 
+            da.Fill(result, "DeploymentDetails");
+            //Close the database connection 
+            conn.Close();
+            //Transferring rows of data in DataSet’s table to “Staff” objects 
+            List<Deployment> deploymentList = new List<Deployment>();
+            foreach (DataRow row in result.Tables["DeploymentDetails"].Rows)
+            {
+                int? DeploymentID;
+                //BranchNo column not null 
+                if (!DBNull.Value.Equals(row["DeploymentID"]))
+                    DeploymentID = Convert.ToInt32(row["DeploymentID"]);
+                else
+                    DeploymentID = null;
+
+                deploymentList.Add(
+                    new Deployment
+                    {
+                        DeploymentID = Convert.ToInt32(row["DeploymentID"]),
+                        DeploymentType = row["DeploymentType"].ToString(),
+                        MID = row["MID"].ToString(),
+                        TID = row["TID"].ToString(),
+                        Schemes = row["Schemes"].ToString(),
+                        MerchantType = row["MerchantType"].ToString(),
+                        SGQRID = row["SGQRID"].ToString(),
+                        SGQRVersion = row["SGQRVersion"].ToString(),
+                        
+                    }
+                );
+            }
+            return deploymentList;
+        }
+        public Deployment GetDetails(int deploymentId)
+        {
+            //Instantiate a SqlCommand object, supply it with a 
+            //SELECT SQL statement that operates against the database, 
+            //and the connection object for connecting to the database. 
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Deployment ORDER BY DeploymentID", conn);
+            //Instantiate a DataAdapter object and pass the 
+            //SqlCommand object created as parameter. 
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //Create a DataSet object to contain records get from database 
+            DataSet result = new DataSet();
+
+            //Open a database connection 
+            conn.Open();
+            //Use DataAdapter, which execute the SELECT SQL through its 
+            //SqlCommand object to fetch data to a table "StaffDetails" 
+            //in DataSet "result". 
+            da.Fill(result, "DeploymentDetails");
+            //Close the database connection 
+            conn.Close();
+            Deployment deployment = new Deployment() { };
+            foreach (DataRow row in result.Tables["DeploymentDetails"].Rows)
+            {
+                deployment = new Deployment
+                {
+                    DeploymentID = Convert.ToInt32(row["DeploymentID"]),
+                    DeploymentType = row["DeploymentType"].ToString(),
+                    MID = row["MID"].ToString(),
+                    TID = row["TID"].ToString(),
+                    Schemes = Convert.ToString(row["Schemes"]),
+                    MerchantType = Convert.ToString(row["MerchantType"]),
+                    SGQRID = row["MID"].ToString(),
+                    SGQRVersion = row["SGQRVer"].ToString(),
+                };
+            }
+            return deployment;
         }
     }
 }

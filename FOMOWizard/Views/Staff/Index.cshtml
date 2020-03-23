@@ -2,10 +2,10 @@
 
 @{
     ViewData["Title"] = "View Staff";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4 class="PageTitle">View Staff</h4> 
-<p><a asp-action="Create">Create New Staff</a></p> 
+<h4 class="PageTitle">Staff Home</h4> 
+@*<p><a asp-action="Create">Create New Staff</a></p>*@
 <!-- Add a partial view to display a list of staff records in a tabular format. --> 
-<partial name="~/Views/Staff/_ViewStaff.cshtml" model="@Model" />
+<partial name="~/Views/Home/StaffMain.cshtml" model="@Model" />

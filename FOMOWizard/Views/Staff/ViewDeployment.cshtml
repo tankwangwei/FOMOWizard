@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FOMOWizard.Models.Deployment>
+
+@{
+    ViewData["Title"] = "ViewDeployment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.ToList().Count > 0)
+{
+    <div class="table-responsive">
+        <table id="viewStaff" class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Photo</th>
+                    <th>Email Address</th>
+                    <th>Employment Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.DeploymentID.ToString()</td>
+                        <td>@item.DeploymentType</td>
+                    
+                        <td>@item.MerchantType</td>
+                        
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <span style="color:red">No record found!</span>
+}
