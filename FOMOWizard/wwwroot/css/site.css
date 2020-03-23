@@ -1,13 +1,28 @@
 ﻿body {
     background-image: url("../images/FOMO-bg.jpg");
-    text-align: center;
 }
+
+
 #form-container {
     border-radius: 5px;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+    margin-top: 100px;
+    padding: 80px;
 }
 
-#txtLoginID {
+#txtLoginID, #txtPassword {
+    margin: 20px;
+    width: 75%;
+    padding: 5px;
+    border-radius: 4px;
+    border-style: solid;
+    border-color: darkgrey;
+}
+
+#btnStaffLogin {
+    margin: 20px;
+    width: 75%;
 }

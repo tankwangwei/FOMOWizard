@@ -15,25 +15,28 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div class="container" id="form-container" style="margin: 0 auto; padding: 10px;">
+    <div class="container" id="form-container">
         <div>
-            <img src="~/images/FOMO_Logo.png" style="width: 50px; height: 50px;" class="img-glu"/>
+            <img src="~/images/FOMO_Logo.png" style="width: 80px; height: 80px;" class="img-glu" />
         </div>
-            <div class="container"> 
-                <form method="post" action="~/Home/StaffLogin"> 
-                    <fieldset class="loginFieldset">
+        <div>FOMO Wizard</div>
+        <div class="container">
+            <form method="post" action="~/Home/StaffLogin">
+                <fieldset class="loginFieldset">
 
-                        @*Email Input*@
-                        <input type="email" name="txtLoginID" id="txtLoginID" class="form-control" placeholder="Email" required />
+                    @*Email Input*@
+                    <input type="email" name="txtLoginID" id="txtLoginID" placeholder="Email" required />
 
-                        @*Password Input*@
-                        <input type="password" name="txtPassword" id="txtPassword" class="form-control" placeholder="Password" required />
+                    @*Password Input*@
+                    <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" required />
 
-                        <input type="submit" id="btnStaffLogin" class="btn btn-primary" value="Login" />
+                    <input type="submit" id="btnStaffLogin" class="btn btn-danger" value="Login" style="margin: 10px;" />
+                    <div>
                         <span style="color:red;">@TempData["Message"]</span>
-                    </fieldset> 
-                </form> 
-            </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
 </body>
 </html>
