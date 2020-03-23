@@ -49,6 +49,20 @@ namespace FOMOWizard.Controllers
 
             return View();
         }
+        public ActionResult ViewDeployment()
+        {
+            // Stop accessing the action if not logged in 
+            // or account not in the "Staff" role 
+            if ((HttpContext.Session.GetString("Role") == null) ||
+                (HttpContext.Session.GetString("Role") != "Staff"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ViewData["DeploymentType"] = GetDeploymentType();
+            ViewData["MerchantType"] = GetMerchantType();
+
+            return View();
+        }
         private List<SelectListItem> GetDeploymentType()
         {
             List<SelectListItem> deploymenttype = new List<SelectListItem>();
