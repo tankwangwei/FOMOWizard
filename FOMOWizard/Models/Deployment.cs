@@ -28,7 +28,7 @@ namespace FOMOWizard.Models
         public string TID { get; set; }
 
         [Display(Name = "Schemes")]
-        [Required(ErrorMessage ="Please select one of the scheme")]
+        [Required(ErrorMessage ="Please select at least one of the scheme")]
         public string Schemes { get; set; }
 
         [Display(Name = "Merchant Type")]
