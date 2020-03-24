@@ -9,42 +9,33 @@
     <meta charset="utf-8">
     <!-- Set the initial view zooming scale for mobile device -->
     <meta name="viewport" content="width = device-width, initial-scale = 1" />
-    <title>NP Book Rentals</title>
+    <title>FOMO Operations Wizard</title>
     <!-- Reference to customized styling for this website -->
-    <link rel="stylesheet" type="text/css" href="~/css/Site.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div class="container" id="mainContainer">
-        <!-- 1st row -->
-        <div class="flex-container">
-            <!-- Flexbox for logo, auto-expand in the container -->
-            <div style="flex:auto;">
-                <img id="imgNPLogo" src="~/images/fomologo.png" />
-            </div>
-            <!-- Flexbox for staff login --> 
-            <div> 
-                <form method="post" action="~/Home/StaffLogin"> 
-                    <fieldset class="loginFieldset">
-                        <legend>Staff Login</legend>
-                        <label for="txtLoginID">Login ID:</label>
-                        <input type="email" name="txtLoginID" id="txtLoginID" required />
-                        <br />
-                        <label for="txtPassword">Password:</label>
-                        <input type="password" name="txtPassword" id="txtPassword" style="width:100px" required />
-                        <input type="submit" id="btnStaffLogin" class="myButton" value="Login" />
-                        <br /> 
+    <div class="container" id="form-container">
+        <div>
+            <img src="~/images/FOMO_Logo.png" style="width: 80px; height: 80px;" class="img-glu" />
+        </div>
+        <div>FOMO Wizard</div>
+        <div class="container">
+            <form method="post" action="~/Home/StaffLogin">
+                <fieldset class="loginFieldset">
+
+                    @*Email Input*@
+                    <input type="email" name="txtLoginID" id="txtLoginID" placeholder="Email" required />
+
+                    @*Password Input*@
+                    <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" required />
+
+                    <input type="submit" id="btnStaffLogin" class="btn btn-danger" value="Login" style="margin: 10px;" />
+                    <div>
                         <span style="color:red;">@TempData["Message"]</span>
-                    </fieldset> 
-                </form> 
-            </div> 
-        </div> 
-        <!-- 2nd row --> 
-        <div> 
-            <div style="text-align: center;"> 
-                <p> 
-                    <img id="imgLogo" src="~/images/banner.jpeg" style="width: 100%" /> 
-                </p> 
-            </div> 
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 </body>

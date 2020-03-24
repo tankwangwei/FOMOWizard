@@ -1,96 +1,28 @@
 ﻿body {
-    font-family : Arial;
-    font-size : 14px;
+    background-image: url("../images/FOMO-bg.jpg");
 }
 
-.PageTitle {
-    text-align:center;
-    font-weight: bold;
-    color: brown;
-}
 
-.FormContent {
-    padding: 10px;
-    margin: auto;
-    width: 95%;
-}
-
-.col-form-label {
-    text-align: right;
-    font-weight: bold;
-}
-
-#mainContainer {
-    border: 1px solid #000000;
-    margin: auto;
-    width: 80%;
-    padding: 4px;
-}
-
-fieldset {
-    border: 2px solid darkblue;
-    border-radius: 10px;
-    padding: 5px;
-    background-color: antiquewhite;
-}
-
-fieldset legend{
-    padding: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    color: brown;
-    width: auto;
-}
-
-.flex-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-}
-
-.loginFieldset {
-    min-height: 130px;
-    margin-left: 4px;
-    margin-right: 0px;
-}
-
-.loginFieldset label {
-    display: inline-block;
-    padding: 6px;
-    width: 70px;
-}
-
-.myButton {
-    border: 2px solid dodgerblue;
+#form-container {
     border-radius: 5px;
-    padding: 5px;
-    background-color: dodgerblue;
-    color: white;
-    font-weight: bold;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
-    text-decoration: none
+    width: 50%;
+    margin-top: 100px;
+    padding: 80px;
 }
 
-@media screen and (max-width: 918px) {
-   .loginFieldset {
-        min-height: 0px;
-        width: 280px;
-    }
+#txtLoginID, #txtPassword {
+    margin: 20px;
+    width: 75%;
+    padding: 5px;
+    border-radius: 4px;
+    border-style: solid;
+    border-color: darkgrey;
 }
 
-@media screen and (max-width: 772px) {
-    .flex-container {
-        flex-direction: column;
-    }
-
-    .loginFieldset {
-        min-height: 0px;
-        width: 95%;
-    }
-
-    #mainContainer {
-        padding: 0;
-        border: none;
-    }
+#btnStaffLogin {
+    margin: 20px;
+    width: 75%;
 }

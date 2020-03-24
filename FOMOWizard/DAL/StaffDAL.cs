@@ -111,7 +111,7 @@ namespace FOMOWizard.DAL
                 ("INSERT INTO Deployment (DeploymentType, MID, TID, Schemes, MerchantType, SGQRID, SGQRVer, DeploymentPhoto, PhotoBefore, PhotoAfter) " + "OUTPUT INSERTED.DeploymentID " + "VALUES(@deploymenttype, @mid, @tid, @schemes, @merchanttype, @sgqrid, @sgqrver, @deploymentphoto, @photobefore, @photoafter)", conn);
             //Define the parameters used in SQL statement, value for each parameter //is retrieved from respective class's property. 
             cmd.Parameters.AddWithValue("@deploymenttype", deployment.DeploymentType);
-            cmd.Parameters.AddWithValue("@mid", deployment.MID);    
+            cmd.Parameters.AddWithValue("@mid", deployment.MID);
             cmd.Parameters.AddWithValue("@tid", deployment.TID);
             cmd.Parameters.AddWithValue("@schemes", deployment.Schemes);
             cmd.Parameters.AddWithValue("@merchanttype", deployment.MerchantType);
@@ -126,12 +126,11 @@ namespace FOMOWizard.DAL
 
             //ExecuteScalar is used to retrieve the auto-generated //StaffID after executing the INSERT SQL statement 
             deployment.DeploymentID = (int)cmd.ExecuteScalar();
-
             //A connection should be closed after operations. 
             conn.Close();
 
             //Return id when no error occurs. 
-            return deployment.DeploymentID;
+            return (deployment.DeploymentID);
         }
 
         public List<Deployment> GetAllDeployment()
