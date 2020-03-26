@@ -61,7 +61,9 @@ namespace FOMOWizard.Controllers
             ViewData["DeploymentType"] = GetDeploymentType();
             ViewData["MerchantType"] = GetMerchantType();
 
-            return View();
+            List<Deployment> deployments = staffContext.GetAllDeployment();
+
+            return View(deployments);
         }
         private List<SelectListItem> GetDeploymentType()
         {

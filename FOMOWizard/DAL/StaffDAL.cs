@@ -169,8 +169,9 @@ namespace FOMOWizard.DAL
                         Schemes = row["Schemes"].ToString(),
                         MerchantType = row["MerchantType"].ToString(),
                         SGQRID = row["SGQRID"].ToString(),
-                        SGQRVersion = row["SGQRVersion"].ToString(),
-                        
+                        SGQRVersion = row["SGQRVer"].ToString(),
+                        //SGQRVersion = row["SGQRVersion"].ToString(),
+
                     }
                 );
             }
