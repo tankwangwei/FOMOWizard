@@ -115,7 +115,7 @@ namespace FOMOWizard.DAL
             cmd.Parameters.AddWithValue("@tid", deployment.TID);
             cmd.Parameters.AddWithValue("@schemes", deployment.Schemes);
             cmd.Parameters.AddWithValue("@merchanttype", deployment.MerchantType);
-            cmd.Parameters.AddWithValue("@sgqrid", deployment.SGQRID); 
+            cmd.Parameters.AddWithValue("@sgqrid", deployment.SGQRID);
             cmd.Parameters.AddWithValue("@sgqrver", deployment.SGQRVersion);
             cmd.Parameters.AddWithValue("@deploymentphoto", deployment.DeploymentPhoto);
             cmd.Parameters.AddWithValue("@photobefore", deployment.PhotoBefore);
@@ -124,8 +124,9 @@ namespace FOMOWizard.DAL
             //A connection to database must be opened before any operations made.
             conn.Open();
 
-            //ExecuteScalar is used to retrieve the auto-generated //StaffID after executing the INSERT SQL statement 
+            //ExecuteScalar is used to retrieve the auto-generated //StaffID after executing the INSERT SQL statement
             deployment.DeploymentID = (int)cmd.ExecuteScalar();
+
             //A connection should be closed after operations. 
             conn.Close();
 
