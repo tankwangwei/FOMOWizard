@@ -1,14 +1,16 @@
-﻿<!-- A grey navbar that expands horizontally at medium device --> 
-<nav class="navbar navbar-expand-md bg-light navbar-light"> 
-    <!-- The brand(or icon) of the navbar --> 
-    <a class="navbar-brand" href="~/Home/StaffMain" style="font-size:32px; font-weight:bold; color:#ff0000;"> FOMO Operation Wizard </a> 
-    <!-- Toggle/collapsible Button, also known as hamburger button --> 
+﻿<!-- A grey navbar that expands horizontally at medium device -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <!-- The brand(or icon) of the navbar -->
+    <a class="navbar-brand" href="~/Home/StaffMain">
+        <img src="https://www.fomopay.com/wp-content/uploads/2017/05/fomo-pay-logo-580-140.png" width="220" height="50">
+    </a>
+    <!-- Toggle/collapsible Button, also known as hamburger button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#staffNavbar">
         <span class="navbar-toggler-icon"></span>
-    </button> 
-    <!-- Links in the navbar, displayed as drop-down list when collapsed --> 
-    <div class="collapse navbar-collapse" id="staffNavbar"> 
-    <!-- Links that are aligned to the left, mr-auto: right margin auto-adjusted --> 
+    </button>
+    <!-- Links in the navbar, displayed as drop-down list when collapsed -->
+    <div class="collapse navbar-collapse" id="staffNavbar">
+        <!-- Links that are aligned to the left, mr-auto: right margin auto-adjusted -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="~/Staff/Create"> Create Deployment Record</a>
@@ -22,13 +24,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="~/Branch/Index">Function 4</a>
             </li>
-        </ul> 
-    <!-- Links that are aligned to the right, ml-auto: left margin auto-adjusted --> 
-        <ul class="navbar-nav ml-auto"> 
-            <li class="nav-item"> 
-            <!-- A link for logging out user --> 
-                <a class="nav-link" href="~/Home/LogOut">Log Out</a> 
-            </li> 
-        </ul> 
-    </div> 
+        </ul>
+        <!-- Links that are aligned to the right, ml-auto: left margin auto-adjusted -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <!-- A link for logging out user -->
+                <a class="nav-link" href="~/Home/LogOut">Log Out</a>
+            </li>
+        </ul>
+    </div>
 </nav>

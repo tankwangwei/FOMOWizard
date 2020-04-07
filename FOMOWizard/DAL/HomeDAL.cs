@@ -52,5 +52,42 @@ namespace FOMOWizard.DAL
                 return true;
             }
         }
+
+        public string GetName(string LoginID)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT Name FROM Staff WHERE Email = @LoginID", conn);
+            cmd.Parameters.AddWithValue("@LoginID", LoginID);
+            SqlDataAdapter nameDA = new SqlDataAdapter(cmd);
+            DataSet nameDS = new DataSet();
+            conn.Open();
+            nameDA.Fill(nameDS, "Name");
+            conn.Close();
+            Staff staff = new Staff();
+            foreach (DataRow row in nameDS.Tables["Name"].Rows)
+            {
+                staff.Name = row["Name"].ToString();
+            }
+
+            return staff.Name.ToString();
+        }
+
+        public string GetDepartment(string LoginID)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT Department FROM Staff WHERE Email = @LoginID", conn);
+            cmd.Parameters.AddWithValue("@LoginID", LoginID);
+            SqlDataAdapter departmentDA = new SqlDataAdapter(cmd);
+            DataSet departmentDS = new DataSet();
+            conn.Open();
+            departmentDA.Fill(departmentDS, "Department");
+            conn.Close();
+            Staff staff = new Staff();
+            foreach (DataRow row in departmentDS.Tables["Department"].Rows)
+            {
+                staff.Department = row["Department"].ToString();
+            }
+
+            return staff.Department.ToString();
+            
+        }
     }
 }

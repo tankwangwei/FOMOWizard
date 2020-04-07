@@ -9,140 +9,211 @@
         margin-left: 30px;
         padding-top: 10px;
         padding-bottom: 10px;
-        font-weight:bold;
-        width:100px;
+        font-weight: bold;
+        width: 100px;
     }
-
 </style>
 
-<form asp-action="Create">
-    <fieldset class="FormContent">
-        <div class="form-group row">
-            <label asp-for="DeploymentType" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
+<form asp-action="Create" style="border: solid thin;  border-radius: 3px;" class="container">
+    <fieldset class="FormContent row">
+
+        @*Deployment Type Field*@
+        <div class="form-group col-lg-6 col-md-12" id="first-formGroup">
+            <label asp-for="DeploymentType" class="col-form-label"></label>
+            <div>
                 <select asp-for="DeploymentType" asp-items="@ViewData["DeploymentType"] as List<SelectListItem>"
                         class="form-control"></select>
             </div>
         </div>
-        <div class="form-group row">
-            <label asp-for="MID" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="MID" class="form-control" />
-                <span asp-validation-for="MID" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label asp-for="TID" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="TID" class="form-control" />
-                <span asp-validation-for="TID" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label asp-for="Schemes" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-1">
-                <div class="">
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="True" class="form-check-input" />
-                        <span>ActiveSG</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="AliPay" class="form-check-input" />
-                        <span>AliPay</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="Singtel Dash" class="form-check-input" />
-                        <span>Singtel Dash</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="EZ-Link" class="form-check-input" />
-                        <span>EZ-Link</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="GrabPay" class="form-check-input" />
-                        <span>GrabPay</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="RazerPay" class="form-check-input" />
-                        <span>RazerPay</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="RemoPay" class="form-check-input" />
-                        <span>RemoPay</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="UnionPay" class="form-check-input" />
-                        <span>UnionPay</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="WeChat" class="form-check-input" />
-                        <span>WeChat</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="PayNOW" class="form-check-input" />
-                        <span>PayNOW</span>
-                    </label>
-                    <label class="scheme">
-                        <input asp-for="Schemes" type="checkbox" value="NETSPay" class="form-check-input" />
-                        <span>NETSPay</span>
-                    </label>
+
+        @*MID and TID*@
+        <div class="col-12">
+            <div class="row">
+                @*MID Field*@
+                <div class="form-group col-lg-6 col-md-12">
+                    <label asp-for="MID" class="col-form-label"></label>
+                    <div>
+                        <input asp-for="MID" class="form-control" />
+                        <span asp-validation-for="MID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @*TID Field*@
+                <div class="form-group col-lg-6 col-md-12">
+                    <label asp-for="TID" class="col-form-label"></label>
+                    <div>
+                        <input asp-for="TID" class="form-control" />
+                        <span asp-validation-for="TID" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label asp-for="MerchantType" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
+
+        @*Schemes*@
+        <div class="form-group col-12">
+            <fieldset>
+                <legend>Schemes</legend>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox" />
+                                <span>ActiveSG</span>
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox" />
+                                <span>AliPay</span>
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox" />
+                                <span>Singtel Dash</span>
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox" />
+                                <span>EZ-Link</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox " />
+                                <span>GrabPay</span>
+                            </label>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox " />
+                                <span>RazerPay</span>
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox " />
+                                <span>RemoPay</span>
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox " />
+                                <span>UnionPay</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox " />
+                                <span>WeChat</span>
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox " />
+                                <span>PayNOW</span>
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <label class="scheme">
+                                <input asp-for="Schemes" type="checkbox" class="form-check-input checkbox " />
+                                <span>NETSPay</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        @*Merchant Type*@
+        <div class="form-group col-lg-6 col-md-12">
+            <label asp-for="MerchantType" class="col-form-label"></label>
+            <div>
                 <select asp-for="MerchantType" asp-items="@ViewData["MerchantType"] as List<SelectListItem>"
                         class="form-control"></select>
             </div>
         </div>
-        <div class="form-group row">
-            <label asp-for="SGQRID" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="SGQRID" class="form-control" />
-                <span asp-validation-for="SGQRID" class="text-danger"></span>
+
+        <div class="col-12">
+            <div class="row">
+                @*SGQR ID*@
+                <div class="form-group col-lg-6 col-md-12">
+                    <label asp-for="SGQRID" class="col-form-label"></label>
+                    <div>
+                        <input asp-for="SGQRID" class="form-control" />
+                        <span asp-validation-for="SGQRID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @*SGQR Version*@
+                <div class="form-group col-lg-6 col-md-12">
+                    <label asp-for="SGQRVersion" class="col-form-label"></label>
+                    <div>
+                        <input asp-for="SGQRVersion" class="form-control" />
+                        <span asp-validation-for="SGQRVersion" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label asp-for="SGQRVersion" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="SGQRVersion" class="form-control" />
-                <span asp-validation-for="SGQRVersion" class="text-danger"></span>
+
+        @*Uploads*@
+        <div class="col-12">
+            <div class="row">
+                <div class="form-group col-lg-4 col-md-6">
+                    <div>
+                        <label asp-for="DeploymentPhoto" class="file-label">Deployment Report</label>
+                        <input asp-for="DeploymentPhoto" type="file" class="form-control-file">
+                    </div>
+                </div>
+                <div class="form-group col-lg-4 col-md-6">
+                    <div>
+                        <label asp-for="PhotoBefore" class="file-label">Photo Before</label>
+                        <input asp-for="PhotoBefore" type="file" class="form-control-file">
+                    </div>
+                </div>
+                <div class="form-group col-lg-4 col-md-6">
+                    <div>
+                        <label asp-for="PhotoAfter" class="file-label"> Photo After</label>
+                        <input asp-for="PhotoAfter" type="file" class="form-control-file">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label asp-for="Remarks" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="Remarks" class="form-control" />
-                <span asp-validation-for="Remarks" class="text-danger"></span>
+
+        @*Remarks*@
+        <div class="col-12">
+            <div class="row">
+                <div class="form-group col-12">
+                    <label asp-for="Remarks" class="form-label"></label>
+                    <div>
+                        <textarea asp-for="Remarks" rows="5" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <span asp-validation-for="Remarks" class="text-danger"></span>
+        </div>
+
+        @*Submit Button*@
+        <div class="col-12">
+            <div class="row">
+                <div class="form-group" id="submitBtn">
+                    <div>
+                        <input type="submit" value="Upload" class="btn btn-primary"/>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form-group row">
-            <label asp-for="DeploymentPhoto" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="DeploymentPhoto" type="file" class="form-control">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label asp-for="PhotoBefore" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="PhotoBefore" type="file" class="form-control">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label asp-for="PhotoAfter" class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="PhotoAfter" type="file" class="form-control">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-9 offset-sm-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </div>
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
-        @*<a asp-action="UploadPhoto" asp-route-id="@Model.StaffID">Upload Photo</a>*@
     </fieldset>
 </form>

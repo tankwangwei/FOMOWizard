@@ -47,6 +47,8 @@ namespace FOMOWizard.Controllers
             ViewData["DeploymentType"] = GetDeploymentType();
             ViewData["MerchantType"] = GetMerchantType();
 
+            
+
             return View();
         }
         public ActionResult ViewDeployment()
@@ -95,7 +97,7 @@ namespace FOMOWizard.Controllers
             {
                 //Add staff record to database 
                 deployment.DeploymentID = staffContext.Add(deployment);
-                //Redirect user to Staff/Index view 
+                //Redirect user to Staff/Index view
                 return RedirectToAction("Create");
             }
             else

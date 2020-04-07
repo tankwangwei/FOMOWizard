@@ -16,21 +16,27 @@
 </head>
 <body>
     <div class="container" id="form-container">
-        <div>
+        <div class="justify-content-center">
             <img src="~/images/FOMO_Logo.png" style="width: 80px; height: 80px;" class="img-glu" />
         </div>
         <div>FOMO Wizard</div>
         <div class="container">
             <form method="post" action="~/Home/StaffLogin">
                 <fieldset class="loginFieldset">
+                    <div class="login-wrapper">
+                        @*Email Input*@
+                        <input type="email" name="txtLoginID" id="txtLoginID" placeholder="Email" required />
+                    </div>
+                    
+                    <div class="password-wrapper">
+                        @*Password Input*@
+                        <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" required />
+                    </div>
 
-                    @*Email Input*@
-                    <input type="email" name="txtLoginID" id="txtLoginID" placeholder="Email" required />
-
-                    @*Password Input*@
-                    <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" required />
-
-                    <input type="submit" id="btnStaffLogin" class="btn btn-danger" value="Login" style="margin: 10px;" />
+                    <div class="loginBtn-wrapper">
+                        <input type="submit" id="btnStaffLogin" class="btn btn-danger" value="Login" />
+                    </div>
+                    
                     <div>
                         <span style="color:red;">@TempData["Message"]</span>
                     </div>

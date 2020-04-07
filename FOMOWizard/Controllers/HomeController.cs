@@ -26,15 +26,27 @@ namespace FOMOWizard.Controllers
             // Read inputs from textboxes // Email address converted to lowercase 
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
+
             Staff staff = staffContext.GetStaff(loginID);
             if (homeContext.IsEmailExist(loginID, password))
             {
                 if (loginID == staff.Email.ToLower() && password == staff.Password)
                 {
+                    string name = homeContext.GetName(loginID);
+                    string department = homeContext.GetDepartment(loginID);
+
                     // Store Login ID in session with the key as “LoginID” 
                     HttpContext.Session.SetString("LoginID", loginID);
+
                     // Store user role “Staff” in session with the key as “Role” 
                     HttpContext.Session.SetString("Role", "Staff");
+
+                    //Store the Name of Staff in session
+                    HttpContext.Session.SetString("Name", name);
+
+                    //Store Staff's Department
+                    HttpContext.Session.SetString("Department", department);
+
                     // Redirect user to the "StaffMain" view through an action 
                     return RedirectToAction("StaffMain");
                 }

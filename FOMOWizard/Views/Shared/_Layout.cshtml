@@ -39,12 +39,13 @@
                         string userRole = "Unknown";
                         if (Context.Session.GetString("Role") != null)
                         {
-                            userRole = Context.Session.GetString("Role");
+                            userRole = Context.Session.GetString("Department");
                         }
                         if (Context.Session.GetString("LoginID") != null)
                         {
-                            userId = Context.Session.GetString("LoginID");
+                            userId = Context.Session.GetString("Name");
                         }
+                        
                     }
                     Welcome,&nbsp;
                     <span style="font-weight:bold">@userId</span>&nbsp; (Role: @userRole).&nbsp;

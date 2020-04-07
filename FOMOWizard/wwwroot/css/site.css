@@ -1,7 +1,6 @@
-﻿body {
-    background-image: url("../images/FOMO-bg.jpg");
+﻿form {
+    margin: 0 auto;
 }
-
 
 #form-container {
     border-radius: 5px;
@@ -13,8 +12,28 @@
     padding: 80px;
 }
 
+.form-group {
+    padding: 0 30px 0 30px;
+}
+
+#first-formGroup {
+    margin-top: 20px;
+}
+
+#submitBtn {
+    margin-bottom: 20px;
+}
+
+input, label {
+    display: block;
+}
+
+.login-wrapper, .password-wrapper {
+    padding: 15px 0;
+}
+
 #txtLoginID, #txtPassword {
-    margin: 20px;
+    margin: 0 auto;
     width: 75%;
     padding: 5px;
     border-radius: 4px;
@@ -22,7 +41,48 @@
     border-color: darkgrey;
 }
 
+.loginBtn-wrapper {
+    padding: 50px 0;
+}
+
 #btnStaffLogin {
-    margin: 20px;
+    margin: 0 auto;
     width: 75%;
+    border: none;
+}
+
+@media (max-width: 1300px) {
+    #txtLoginID, #txtPassword {
+        width: 100%;
+    }
+
+    #btnStaffLogin  {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1180px) {
+    #form-container {
+        margin-top: 50px;
+        width: 75%;
+    }
+}
+
+@media (max-width: 700px) {
+    #form-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 577px) {
+    #form-container {
+        box-shadow: none;
+        padding: 30px;
+    }
+
+    .login-wrapper, .password-wrapper {
+        padding: 15px 0;
+        width: 100%;
+    }
+
 }
