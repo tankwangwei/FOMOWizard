@@ -1,0 +1,37 @@
+﻿.btn1, .btn2, .btn3, .btn4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn1 :hover, .btn2 :hover, .btn3 :hover, .btn4 :hover {
+    text-decoration:none;
+}
+.btn-lg {
+    padding: 30px;
+}
+
+.fa-file-upload {
+    font-size: 50px;
+    color: blue;
+    text-align: center;
+}
+
+.fa-table {
+    font-size: 50px;
+    color: red;
+    text-align: center;
+}
+
+.fa-font {
+    font-size: 50px;
+    color: yellow;
+    text-align: center;
+}
+
+.fa-bold {
+    font-size: 50px;
+    color: green;
+    text-align: center;
+}
