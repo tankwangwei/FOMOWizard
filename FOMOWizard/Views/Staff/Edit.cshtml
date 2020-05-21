@@ -12,16 +12,13 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="DeploymentID" class="control-label"></label>
-                <input asp-for="DeploymentID" class="form-control" />
-                <span asp-validation-for="DeploymentID" class="text-danger"></span>
+                <input asp-for="DeploymentID" readonly class="form-control-plaintext"/>
             </div>
             <div class="form-group">
                 <label asp-for="DeploymentType" class="control-label"></label>
-                <input asp-for="DeploymentType" class="form-control" />
-                <span asp-validation-for="DeploymentType" class="text-danger"></span>
+                <input asp-for="DeploymentType" readonly class="form-control-plaintext"/>
             </div>
             <div class="form-group">
                 <label asp-for="MID" class="control-label"></label>
@@ -35,13 +32,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Schemes" class="control-label"></label>
-                <input asp-for="Schemes" class="form-control" />
-                <span asp-validation-for="Schemes" class="text-danger"></span>
+                <input asp-for="Schemes" readonly class="form-control-plaintext"/>
             </div>
             <div class="form-group">
                 <label asp-for="MerchantType" class="control-label"></label>
-                <input asp-for="MerchantType" class="form-control" />
-                <span asp-validation-for="MerchantType" class="text-danger"></span>
+                <input asp-for="MerchantType" readonly class="form-control-plaintext"/>
             </div>
             <div class="form-group">
                 <label asp-for="SGQRID" class="control-label"></label>
@@ -54,33 +49,10 @@
                 <span asp-validation-for="SGQRVersion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeploymentPhoto" class="control-label"></label>
-                <input asp-for="DeploymentPhoto" class="form-control" />
-                <span asp-validation-for="DeploymentPhoto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhotoBefore" class="control-label"></label>
-                <input asp-for="PhotoBefore" class="form-control" />
-                <span asp-validation-for="PhotoBefore" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhotoAfter" class="control-label"></label>
-                <input asp-for="PhotoAfter" class="form-control" />
-                <span asp-validation-for="PhotoAfter" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Remarks" class="control-label"></label>
-                <input asp-for="Remarks" class="form-control" />
-                <span asp-validation-for="Remarks" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

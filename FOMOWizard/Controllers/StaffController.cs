@@ -110,24 +110,40 @@ namespace FOMOWizard.Controllers
         // GET: Staff/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            // Stop accessing the action if not logged in // or account not in the "Staff" role 
+            if ((HttpContext.Session.GetString("Role") == null) || (HttpContext.Session.GetString("Role") != "Staff"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (id == null) //Query string parameter not provided 
+            {
+                //Return to listing page, not allowed to edit 
+                return RedirectToAction("Index");
+            }
+
+            Deployment deployment = staffContext.GetDetails(id);
+            if (deployment == null)
+            {
+                //Return to listing page, not allowed to edit 
+                return RedirectToAction("Index");
+            }
+            return View(deployment);
         }
 
         // POST: Staff/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Deployment deployment)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                //Update staff record to database 
+                staffContext.Update(deployment);
+                return RedirectToAction("Edit");
+            }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            //Input validation fails, return to the view //to display error message
+            return View(deployment);
         }
 
         // GET: Staff/Delete/5
