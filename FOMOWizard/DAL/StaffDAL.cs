@@ -145,7 +145,7 @@ namespace FOMOWizard.DAL
             //SELECT SQL statement that operates against the database, 
             //and the connection object for connecting to the database. 
             SqlCommand cmd = new SqlCommand("SELECT * FROM Deployment ORDER BY DeploymentID", conn);
-            //Instantiate a DataAdapter object and pass the 
+            //Instantiate a DataAdapter object and pass the     
             //SqlCommand object created as parameter. 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             //Create a DataSet object to contain records get from database 
@@ -159,7 +159,8 @@ namespace FOMOWizard.DAL
             da.Fill(result, "DeploymentDetails");
             //Close the database connection 
             conn.Close();
-            Deployment deployment = new Deployment() { };
+
+            /*Deployment deployment = new Deployment() { };
             foreach (DataRow row in result.Tables["DeploymentDetails"].Rows)
             {
                 deployment = new Deployment
@@ -174,7 +175,57 @@ namespace FOMOWizard.DAL
                     SGQRVersion = row["SGQRVer"].ToString(),
                 };
             }
-            return deployment;
+            return deployment;*/
+
+            Deployment deployment = new Deployment(); if (result.Tables["DeploymentDetails"].Rows.Count > 0)
+            {
+                deployment.DeploymentID = deploymentId;
+                // Fill staff object with values from the DataSet 
+                DataTable table = result.Tables["DeploymentDetails"];
+                if (!DBNull.Value.Equals(table.Rows[0]["DeploymentType"]))
+                    deployment.DeploymentType = table.Rows[0]["DeploymentType"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["MID"]))
+                    deployment.MID = table.Rows[0]["MID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["TID"]))
+                    deployment.TID = table.Rows[0]["TID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["Schemes"]))
+                    deployment.Schemes = table.Rows[0]["Schemes"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["MerchantType"]))
+                    deployment.MerchantType = table.Rows[0]["MerchantType"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["SGQRID"]))
+                    deployment.SGQRID = table.Rows[0]["SGQRID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["SGQRVer"]))
+                    deployment.SGQRVersion = table.Rows[0]["SGQRVer"].ToString();
+
+                return deployment;  // No error occurs 
+            }
+            else
+            {
+                return null; // Record not found 
+            }
+        }
+        // Return number of row updated 
+        public int Update(Deployment deployment)
+        {
+            //Instantiate a SqlCommand object, supply it with SQL statement UPDATE //and the connection object for connecting to the database. 
+            SqlCommand cmd = new SqlCommand("UPDATE Deployment SET MID=@mid, TID=@tid, SGQRID=@sgqrid, SGQRVer=@sgqrver" + " WHERE DeploymentID = @selectedDeploymentID", conn);
+
+            //Define the parameters used in SQL statement, value for each parameter //is retrieved from the respective property of “staff” object. 
+            cmd.Parameters.AddWithValue("@mid", deployment.MID);
+            cmd.Parameters.AddWithValue("@tid", deployment.TID);
+            cmd.Parameters.AddWithValue("@sgqrid", deployment.SGQRID);
+            cmd.Parameters.AddWithValue("@sgqrver", deployment.SGQRVersion);
+
+            cmd.Parameters.AddWithValue("@selectedDeploymentID", deployment.DeploymentID);
+
+            //Open a database connection. 
+            conn.Open();
+            //ExecuteNonQuery is used for UPDATE and DELETE 
+            int count = cmd.ExecuteNonQuery();
+            //Close the database connection. 
+            conn.Close();
+
+            return count;
         }
 
         public List<Payload> GetPayloads()
