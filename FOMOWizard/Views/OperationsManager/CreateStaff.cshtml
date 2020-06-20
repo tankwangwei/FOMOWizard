@@ -1,0 +1,41 @@
+﻿@model FOMOWizard.Models.Staff
+@{
+    ViewData["Title"] = "Create Staff";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a new Staff</h2>
+<form asp-controller="OperationsManager" asp-action="CreateStaff">
+    <fieldset class="FormContent">
+        <div class="form-group row">
+            <label asp-for="Name" class="col-md-3 col-form-label"></label>
+            <input asp-for="Name" class="col-md-9 form-control" placeholder="Enter Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Email" class="col-md-3 col-form-label"></label>
+            <input asp-for="Email" class="col-md-9 form-control" placeholder="Enter Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Password" class="col-md-3 col-form-label"></label>
+            <input asp-for="Password" class="col-md-9 form-control" placeholder="Enter Password" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="Department" class="col-md-3 col-form-label"></label>
+            <input asp-for="Department" value="Operations" class="col-md-9 form-control"/>
+        </div>
+        
+        <div class="form-group row">
+            <label asp-for="Role" class="col-sm-3 col-form-label"></label>
+            <select asp-for="Role" asp-items="@ViewData["TypesOfRoles"] as List<SelectListItem>"class="form-control col-md-9"></select>
+        </div>
+        <br />
+        <div class="form-group row">
+            <input type="submit" value="Create" class="btn btn-info" />
+            <input type="reset" value="Reset" class="btn btn-danger" />
+        </div>
+        <div>@(TempData["CreateStaffErrorMessage"])</div>
+    </fieldset>
+</form>
+

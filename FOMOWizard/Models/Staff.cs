@@ -25,9 +25,13 @@ namespace FOMOWizard.Models
         public string Password { get; set; }
 
         [Display(Name = "Department")]
+        [Required]
         public string Department { get; set; }
 
-        [Display(Name = "Approved")]
-        public bool Approved { get; set; }
+        [Display(Name = "Role")]
+        [Required]
+        public string Role { get; set; }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿form {
+﻿/*Login styles*/
+form {
     margin: 0 auto;
 }
 
@@ -49,6 +50,12 @@ input, label {
     margin: 0 auto;
     width: 75%;
     border: none;
+}
+/*Login styles*/
+
+/*View payload styles*/
+#filterModal {
+    width: 700px;
 }
 
 @media (max-width: 1300px) {

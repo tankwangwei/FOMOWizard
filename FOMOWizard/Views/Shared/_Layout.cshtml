@@ -7,26 +7,39 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/css/site.css" rel="stylesheet" />
-    <title>@ViewData["Title"] - FOMO Pay Wizard</title> <!-- Reference to Bootstrap CSS, JavaScript/JQuery files -->
+    
+    <title>@ViewData["Title"] - FOMO Pay Wizard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="~/css/site.css" rel="stylesheet" />
     <script src="~/js/jquery-3.3.1.min.js"></script>
     <script src="~/js/popper.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script> <!-- Reference to customized styling for this website -->
+    <script src="~/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
 </head>
 <body>
-    <!-- Bootstrap container, centralise the container between margins -->
+    
     <div class="container">
         <!-- 1st row -->
         <div class="row">
             <div class="col-sm-12">
-                @if (Context.Session.GetString("Role") != null)
+                @if (Context.Session.GetString("Department") != null && Context.Session.GetString("Department") == "Operations")
                 {
-                    if (Context.Session.GetString("Role") == "Staff")
+                    if (Context.Session.GetString("Role") == "Manager")
+                    {
+                        @await Html.PartialAsync("_OperationsManagerMenu.cshtml")
+                    }
+                    else if (Context.Session.GetString("Role") == "Staff")
+                    {
+                        @await Html.PartialAsync("_OperationsStaffMenu.cshtml")
+                    }
+
+                    else if (Context.Session.GetString("Role") == "Part-timer")
                     {
                         @await Html.PartialAsync("_StaffMenu.cshtml")
                     }
-                }   
+                }
             </div>
         </div>
         <!-- 2nd row -->
@@ -34,20 +47,20 @@
             <div class="col-sm-12">
                 <p style="padding:2px 15px;">
                     @{
-                        string userId = "Anonymous";
-                        string userRole = "Unknown";
-                        if (Context.Session.GetString("Role") != null)
+                        string userName = "Anonymous";
+                        string userDepartment = "Unknown";
+                        if (Context.Session.GetString("Department") != null)
                         {
-                            userRole = Context.Session.GetString("Department");
+                            userDepartment = Context.Session.GetString("Department");
                         }
                         if (Context.Session.GetString("LoginID") != null)
                         {
-                            userId = Context.Session.GetString("Name");
+                            userName = Context.Session.GetString("Name");
                         }
-                        
+
                     }
                     Welcome,&nbsp;
-                    <span style="font-weight:bold">@userId</span>&nbsp; (Role: @userRole).&nbsp;
+                    <span style="font-weight:bold">@userName</span>&nbsp;(Department: @userDepartment).&nbsp;
                 </p>
             </div>
         </div>
@@ -69,5 +82,12 @@
             </div>
         </div>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+    <script src="~/js/JavaScript.js"></script>
 </body>
 </html>

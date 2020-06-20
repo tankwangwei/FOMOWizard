@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using FOMOWizard.DAL;
 using FOMOWizard.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System.Threading;
+using System.Diagnostics;
 
 namespace FOMOWizard.Controllers
 {
@@ -13,7 +17,6 @@ namespace FOMOWizard.Controllers
     {
         private HomeDAL homeContext = new HomeDAL();
         StaffDAL staffContext = new StaffDAL();
-        Staff staff = new Staff();
 
         public IActionResult Index()
         {
@@ -22,49 +25,56 @@ namespace FOMOWizard.Controllers
 
         [HttpPost]
         public ActionResult StaffLogin(IFormCollection formData)
-        {
-            // Read inputs from textboxes // Email address converted to lowercase 
+        {   
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
 
             Staff staff = staffContext.GetStaff(loginID);
+
             if (homeContext.IsEmailExist(loginID, password))
             {
                 if (loginID == staff.Email.ToLower() && password == staff.Password)
                 {
                     string name = homeContext.GetName(loginID);
                     string department = homeContext.GetDepartment(loginID);
-
-                    // Store Login ID in session with the key as “LoginID” 
+                    string role = homeContext.GetRole(loginID);
+                    
                     HttpContext.Session.SetString("LoginID", loginID);
-
-                    // Store user role “Staff” in session with the key as “Role” 
-                    HttpContext.Session.SetString("Role", "Staff");
-
-                    //Store the Name of Staff in session
                     HttpContext.Session.SetString("Name", name);
-
-                    //Store Staff's Department
                     HttpContext.Session.SetString("Department", department);
+                    HttpContext.Session.SetString("Role", role);
 
-                    // Redirect user to the "StaffMain" view through an action 
-                    return RedirectToAction("StaffMain");
+                    if (department == "Operations")
+                    {
+                        if (role == "Manager")
+                        {
+                            return RedirectToAction("Index", "OperationsManager");
+                        }
+                        else if (role == "Staff")
+                        {
+                            return RedirectToAction("Index", "OperationsStaff");
+                        }
+                        else if (role == "Part-timer")
+                        {
+                            return RedirectToAction("Index", "PartTimeStaff");
+                        }
+                    }
                 }
 
                 else
                 {
-                    TempData["Message"] = "Invalid Login";
-                    return RedirectToAction("Index");
+                    TempData["Message"] = "Your credentials are incorrect!";
+                    return RedirectToAction("Index", "Home");
                 }
 
+                return View();
             }
 
             else
             {
-                // Store an error message in TempData for display at the index view 
                 TempData["Message"] = "Invalid Login Credentials!";
-                // Redirect user back to the index view through an action 
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -73,7 +83,7 @@ namespace FOMOWizard.Controllers
             // Clear all key-values pairs stored in session state 
             HttpContext.Session.Clear();
             // Call the Index action of Home controller 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult StaffMain()

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<FOMOWizard.Models.Staff>
+@{
+    ViewData["Title"] = "ViewStaff";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Staff</h2>
+@if (Model.ToList().Count > 0)
+{
+    <div class="table-responsive">
+        <table id="viewSkillSet" class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Staff Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.StaffID</td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Department</td>
+                    <td>@item.Role</td>
+                    <td><a asp-action="EditStaff" asp-controller="OperationsManager" asp-route-id="@item.StaffID">Edit</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

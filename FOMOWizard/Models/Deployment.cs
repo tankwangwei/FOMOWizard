@@ -47,7 +47,9 @@ namespace FOMOWizard.Models
         public string PhotoBefore { get; set; }
         public string PhotoAfter { get; set; }
 
-        public IFormFile fileToUpload { get; set; }
+        public virtual IFormFile ImageFile { get; set; }
+
+        public string ImageStorageName { get; set; }
 
         [Display(Name = "Remarks")]
         public string Remarks { get; set; }

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -27,7 +26,7 @@
                         @*Email Input*@
                         <input type="email" name="txtLoginID" id="txtLoginID" placeholder="Email" required />
                     </div>
-                    
+
                     <div class="password-wrapper">
                         @*Password Input*@
                         <input type="password" name="txtPassword" id="txtPassword" placeholder="Password" required />
@@ -36,7 +35,7 @@
                     <div class="loginBtn-wrapper">
                         <input type="submit" id="btnStaffLogin" class="btn btn-danger" value="Login" />
                     </div>
-                    
+
                     <div>
                         <span style="color:red;">@TempData["Message"]</span>
                     </div>

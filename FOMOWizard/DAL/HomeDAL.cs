@@ -59,9 +59,11 @@ namespace FOMOWizard.DAL
             cmd.Parameters.AddWithValue("@LoginID", LoginID);
             SqlDataAdapter nameDA = new SqlDataAdapter(cmd);
             DataSet nameDS = new DataSet();
+
             conn.Open();
             nameDA.Fill(nameDS, "Name");
             conn.Close();
+
             Staff staff = new Staff();
             foreach (DataRow row in nameDS.Tables["Name"].Rows)
             {
@@ -77,9 +79,11 @@ namespace FOMOWizard.DAL
             cmd.Parameters.AddWithValue("@LoginID", LoginID);
             SqlDataAdapter departmentDA = new SqlDataAdapter(cmd);
             DataSet departmentDS = new DataSet();
+
             conn.Open();
             departmentDA.Fill(departmentDS, "Department");
             conn.Close();
+
             Staff staff = new Staff();
             foreach (DataRow row in departmentDS.Tables["Department"].Rows)
             {
@@ -87,7 +91,26 @@ namespace FOMOWizard.DAL
             }
 
             return staff.Department.ToString();
-            
+        }
+
+        public string GetRole(string LoginID)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT Role FROM Staff WHERE Email = @LoginID", conn);
+            cmd.Parameters.AddWithValue("@LoginID", LoginID);
+            SqlDataAdapter roleDA = new SqlDataAdapter(cmd);
+            DataSet roleDS = new DataSet();
+
+            conn.Open();
+            roleDA.Fill(roleDS, "Role");
+            conn.Close();
+
+            Staff staff = new Staff();
+            foreach (DataRow row in roleDS.Tables["Role"].Rows)
+            {
+                staff.Role = row["Role"].ToString();
+            }
+
+            return staff.Role.ToString();
         }
     }
 }

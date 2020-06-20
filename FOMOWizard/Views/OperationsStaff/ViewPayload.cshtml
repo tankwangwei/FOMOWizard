@@ -1,0 +1,106 @@
+﻿@model IEnumerable<FOMOWizard.Models.Payload>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #filters {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+    }
+
+    #searchInput {
+        width: 50%;
+        margin: 0 20px;
+    }
+</style>
+
+
+@if (Model.Count() > 0)
+{
+    <div id="filters">
+        <!-- Filter Button -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
+            Filter
+        </button>
+
+        <!-- Search Function -->
+        <input type="text" id="searchInput" placeholder="Search for merchants..." title="Type in a name">
+
+        <input type="checkbox" id="hideBox" />
+    </div>
+
+    <!-- Filter Modal -->
+    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterModalLabel">Filter it!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <select class="form-control">
+                            <option>Default select</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Filter Modal -->
+
+    <div class="table-responsive">
+        <table id="" class="table thead-dark table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>UEN</th>
+                    <th><a asp-action="Index">Registered Name</a></th>
+                    <th>MID</th>
+                    <th>TID</th>
+                </tr>
+            </thead>
+            <tbody id="payloadTableContents">
+                @foreach (var payload in Model)
+                {
+                    <tr id="myTR">
+                        <td><a>@payload.ID</a></td>
+                        <td><a>@payload.UEN</a></td>
+                        <td><a>@payload.RegisteredName</a></td>
+                        <td><a>@payload.MID</a></td>
+                        <td><a>@payload.TID</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="pageNumbers" id="pagination"></div>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            $("#searchInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#payloadTableContents tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
+
+else
+{
+    <span style="color:red">No record found!</span>
+}
+
+

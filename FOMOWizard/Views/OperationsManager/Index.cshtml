@@ -1,8 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Operations Main Page";
+﻿
+@{
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-sm-6 col-lg-3 btn1">
             <div class="row">
-                <a href="~/Staff/Create" class="col-sm-12" style="text-align: center;">
+                <a href="~/OperationsManager/Create" class="col-sm-12" style="text-align: center;">
                     <i class="fas fa-file-upload"></i>
                 </a>
                 <p class="col-sm-12" style="text-align: center;">Upload</p>
@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-6 col-lg-3 btn2">
             <div class="row">
-                <a href="~/Staff/ViewDeployment" class="col-sm-12" style="text-align: center;">
+                <a href="~/OperationsManager/ViewDeployment" class="col-sm-12" style="text-align: center;">
                     <i class="fas fa-table"></i>
                 </a>
                 <p class="col-sm-12" style="text-align: center;">View Deployments</p>
@@ -30,7 +30,7 @@
         </div>
         <div class="col-sm-6 col-lg-3 btn3">
             <div class="row">
-                <a href="~/Staff/ViewDeployment" class="col-sm-12" style="text-align: center;">
+                <a href="~/OperationsManager/ViewPayload" class="col-sm-12" style="text-align: center;">
                     <i class="fas fa-font"></i>
                 </a>
                 <p class="col-sm-12" style="text-align: center;">Payload</p>
@@ -38,12 +38,20 @@
         </div>
         <div class="col-sm-6 col-lg-3 btn4">
             <div class="row">
-                <a href="~/Staff/ViewDeployment" class="col-sm-12" style="text-align: center;">
+                <a href="~/OperationsManager/ViewStaff" class="col-sm-12" style="text-align: center;">
                     <i class="fas fa-bold"></i>
                 </a>
-                <p class="col-sm-12" style="text-align: center;">Function4</p>
+                <p class="col-sm-12" style="text-align: center;">View Staff</p>
             </div>
-            
+
+        </div>
+        <div class="col-sm-6 col-lg-3 btn3">
+            <div class="row">
+                <a href="~/OperationsManager/CreateStaff" class="col-sm-12" style="text-align: center;">
+                    <i class="fas fa-font"></i>
+                </a>
+                <p class="col-sm-12" style="text-align: center;">Create New Staff</p>
+            </div>
         </div>
 
     </div>
