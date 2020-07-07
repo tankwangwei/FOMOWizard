@@ -1,4 +1,6 @@
 ﻿using FOMOWizard.Models;
+using Google.Apis.Storage.v1.Data;
+using Google.Cloud.Storage.V1;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,17 @@ namespace FOMOWizard.DAL
             //Instantiate a SqlConnection object with the Connection String read. 
             conn = new SqlConnection(strConn);
 
+        }
+
+        //Upload Full Payload to Google Cloud Storage
+        public void UploadFile(string bucketName, string localPath, string objectName = null)
+        {
+            var storage = StorageClient.Create();
+            using (var f = File.OpenRead(localPath))
+            {
+                objectName = objectName ?? Path.GetFileName(localPath);
+                storage.UploadObject(bucketName, objectName, null, f);
+            }
         }
 
         public List<Staff> GetAllStaff()
@@ -174,7 +187,7 @@ namespace FOMOWizard.DAL
                 if (!DBNull.Value.Equals(table.Rows[0]["Role"]))
                 {
                     staff.Role = table.Rows[0]["Role"].ToString();
-                } 
+                }
                 return staff;
             }
             else

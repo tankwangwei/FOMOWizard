@@ -127,42 +127,32 @@ namespace FOMOWizard.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UploadPayload(FullPayloadUploadViewModal modal)
+        public async Task<IActionResult> UploadPayload(List<IFormFile> files)
         {
-            if (modal.FullPayload != null &&
-            modal.FullPayload.Length > 0)
+            var size = files.Sum(f => f.Length);
+
+            var filePaths = new List<string>();
+            foreach (var formFile in files)
             {
-                try
+                if (formFile.Length > 0)
                 {
-                    string fileExt = Path.GetExtension(
-                        modal.FullPayload.FileName);
-                    string uploadFile = "Test" + fileExt;
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\FullPayload", formFile.FileName);
+                    filePaths.Add(filePath);
 
-                    string savePath = Path.Combine(
-                        Directory.GetCurrentDirectory(),
-                        "wwwroot\\images\\Projects", uploadFile);
-
-                    using (var fileStream = new FileStream(savePath, FileMode.Create))
+                    using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        await modal.FullPayload.CopyToAsync(fileStream);
+                        await formFile.CopyToAsync(stream);
                     }
                 }
-                catch (IOException)
-                {
-                    ViewData["Message"] = "Upload Fail";
-                }
-                catch (Exception ex)
-                {
-                    ViewData["Message"] = ex.Message;
-                }
             }
-            return View(modal); 
+
+            return View();
         }
 
         public ActionResult ViewPayload()
         {
             if ((HttpContext.Session.GetString("Role") == null) ||
-                (HttpContext.Session.GetString("Role") != "Staff"))
+                (HttpContext.Session.GetString("Role") != "Manager"))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -258,6 +248,11 @@ namespace FOMOWizard.Controllers
             roles.Add(new SelectListItem { Value = "Manager", Text = "Manager" });
 
             return roles;
+        }
+
+        private bool IsDirectoryEmpty(string path)
+        {
+            return !Directory.EnumerateFileSystemEntries(path).Any();
         }
     }
 }

@@ -12,6 +12,10 @@ namespace FOMOWizard.Models
         public string RegisteredName { get; set; }
         public string MID { get; set; }
         public string TID { get; set; }
+        public string NameOnLabel { get; set; }
+        public string SGQRID { get; set; }
+        public string ContactPerson { get; set; }
+        public string ContactNo { get; set; }
         public string DateAdded { get; set; }
     }
 }

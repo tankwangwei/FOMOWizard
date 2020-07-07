@@ -40,14 +40,15 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <select class="form-control">
-                            <option>Default select</option>
+                        <select>
+                            <option value="All" selected>All</option>
+                            <option value="TID">TID</option>
+                            <option value="TID">MID</option>
                         </select>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <input class="btn btn-primary" type="submit" value="Submit">
                 </div>
             </div>
         </div>
@@ -58,23 +59,33 @@
         <table id="" class="table thead-dark table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>LOCATION</th>
                     <th>UEN</th>
-                    <th><a asp-action="Index">Registered Name</a></th>
                     <th>MID</th>
                     <th>TID</th>
+                    <th>MISC</th>
+                    <th>CO. NAME</th>
+                    <th>SGQR ID</th>
+                    <th>Service Type</th>
+                    <th>Deployment Type</th>
+                    <th>C. Person</th>
+                    <th>C. No.</th>
                 </tr>
             </thead>
             <tbody id="payloadTableContents">
                 @foreach (var payload in Model)
                 {
-                    <tr id="myTR">
-                        <td><a>@payload.ID</a></td>
-                        <td><a>@payload.UEN</a></td>
-                        <td><a>@payload.RegisteredName</a></td>
-                        <td><a>@payload.MID</a></td>
-                        <td><a>@payload.TID</a></td>
-                    </tr>
+                <tr id="myTR">
+                    <td><a>NULL</a></td>
+                    <td><a>@payload.UEN</a></td>
+                    <td><a>@payload.MID</a></td>
+                    <td><a>@payload.TID</a></td>
+                    <td><a>@payload.NameOnLabel</a></td>
+                    <td><a>@payload.SGQRID</a></td>
+                    <td><a>@payload.ContactPerson</a></td>
+                    <td><a>@payload.ContactNo</a></td>
+
+                </tr>
                 }
             </tbody>
         </table>

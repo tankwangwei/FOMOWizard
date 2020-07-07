@@ -7,6 +7,7 @@ using FOMOWizard.Models;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Cloud.Storage.V1;
 
 namespace FOMOWizard.DAL
 {
@@ -14,6 +15,10 @@ namespace FOMOWizard.DAL
     {
         private IConfiguration Configuration { get; set; }
         private SqlConnection conn;
+
+        //Path of file
+        string filePath = @"C:\Users\LUN\Desktop\Demos\Test.csv";
+
         //Constructor
         public OperationsStaffDAL()
         {
@@ -116,13 +121,10 @@ namespace FOMOWizard.DAL
             return deploymentList;
         }
 
-        public List<Payload> GetPayloads()
+        //This function retreive all the payloads
+        public List<Payload> GetPayloadsByRecentMonth()
         {
-            //Path of file
-            string filePath = @"C:\Users\LUN\Desktop\Demos\Test.csv";
-
-            List<Payload> payloads = new List<Payload>();
-
+            List<Payload> allPayloads = new List<Payload>();
             List<string> lines = File.ReadAllLines(filePath).ToList();
 
             //Skip header
@@ -131,51 +133,84 @@ namespace FOMOWizard.DAL
             foreach (var line in lines)
             {
                 string[] entries = line.Split(',');
-                Payload newPayload = new Payload();
+                Payload payload = new Payload();
 
-                //Store date as string from CSV file
-                //string monthExtract = entries[17].Substring(5, 2);
-                //Get the current year
-                string currentMonth = DateTime.Now.ToString("yyyy");
+                payload.ID = Int32.Parse(entries[0]);
+                payload.UEN = entries[2];
+                payload.RegisteredName = entries[3];
+                payload.MID = entries[6];
+                payload.TID = entries[8];
+                
+                //newPayload.DateAdded = entries[17];
 
-                if (entries[17].Substring(5, 7) == currentMonth)
-                {
-                    newPayload.ID = Int32.Parse(entries[0]);
-                    newPayload.UEN = entries[2];
-                    newPayload.RegisteredName = entries[3];
-                    newPayload.MID = entries[6];
-                    newPayload.TID = entries[8];
-                    //newPayload.DateAdded = entries[17];
-
-                    payloads.Add(newPayload);
-                }
-
+                allPayloads.Add(payload);
             }
 
-            var distinctPayloads = payloads.Distinct(new DistinctPayloadComparer()).ToList();
+            var distinctPayloads = allPayloads.Distinct(new DistinctPayloadComparer()).ToList();
 
             return distinctPayloads;
         }
 
+        //Gets All name on label
+        public List<string> getNameOnLabel()
+        {
+            List<string> namesOnLabel = new List<string>();
+            List<string> lines = File.ReadAllLines(filePath).ToList();
+
+            lines = lines.Skip(1).ToList();
+
+            foreach (var line in lines)
+            {
+                string[] entries = line.Split(',');
+
+                namesOnLabel.Add(entries[7]);
+            }
+
+            return namesOnLabel;
+        }
+
+        //This function filter payloads by the Month
+        public List<Payload> GetMonthlyPayloads()
+        {
+            List<Payload> payloadsByMonth = new List<Payload>();
+            List<string> lines = File.ReadAllLines(filePath).ToList();
+
+            //Skip header
+            lines = lines.Skip(1).ToList();
+
+            foreach (var line in lines)
+            {
+                string[] entries = line.Split(',');
+                Payload payload = new Payload();
+
+                if (entries[17].Length >= 10)
+                {
+                    string monthlyExtract = entries[17].Substring(0, 7);
+
+                    if (monthlyExtract.Contains("2020-06"))
+                    {
+                        payload.ID = Int32.Parse(entries[0]);
+                        payload.UEN = entries[2];
+                        payload.MID = entries[6];
+                        payload.TID = entries[8];
+                        payload.NameOnLabel = entries[7];
+                        payload.SGQRID = entries[13];
+                        payload.ContactPerson = entries[21];
+                        payload.ContactNo = entries[22];
+
+                        payloadsByMonth.Add(payload);
+                    }
+                }
+            }
+
+            var distinctPayloads = payloadsByMonth.Distinct(new DistinctPayloadComparer()).ToList();
+
+            return payloadsByMonth;
+        }
+
         public List<Payload> SortPayloadByDesc()
         {
-            return GetPayloads().OrderByDescending(x => x.ID).ToList();
+            return GetMonthlyPayloads().OrderByDescending(x => x.ID).ToList();
         }
-
-        class DistinctPayloadComparer : IEqualityComparer<Payload>
-        {
-
-            public bool Equals(Payload x, Payload y)
-            {
-                return x.ID == y.ID;
-            }
-
-            public int GetHashCode(Payload payload)
-            {
-                return payload.ID.GetHashCode();
-            }
-        }
-
-
     }
 }
