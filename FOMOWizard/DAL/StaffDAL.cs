@@ -131,7 +131,9 @@ namespace FOMOWizard.DAL
                         MerchantType = row["MerchantType"].ToString(),
                         SGQRID = row["SGQRID"].ToString(),
                         SGQRVersion = row["SGQRVer"].ToString(),
-                        //SGQRVersion = row["SGQRVersion"].ToString(),
+                        DeploymentPhoto = row["DeploymentPhoto"].ToString(),
+                        PhotoBefore = row["PhotoBefore"].ToString(),
+                        PhotoAfter = row["PhotoAfter"].ToString(),
 
                     }
                 );
@@ -196,6 +198,12 @@ namespace FOMOWizard.DAL
                     deployment.SGQRID = table.Rows[0]["SGQRID"].ToString();
                 if (!DBNull.Value.Equals(table.Rows[0]["SGQRVer"]))
                     deployment.SGQRVersion = table.Rows[0]["SGQRVer"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["DeploymentPhoto"]))
+                    deployment.SGQRVersion = table.Rows[0]["DeploymentPhoto"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["PhotoBefore"]))
+                    deployment.SGQRVersion = table.Rows[0]["PhotoBefore"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[0]["PhotoAfter"]))
+                    deployment.SGQRVersion = table.Rows[0]["PhotoAfter"].ToString();
 
                 return deployment;  // No error occurs 
             }

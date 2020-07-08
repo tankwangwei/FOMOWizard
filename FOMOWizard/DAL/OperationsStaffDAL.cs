@@ -17,7 +17,7 @@ namespace FOMOWizard.DAL
         private SqlConnection conn;
 
         //Path of file
-        string filePath = @"C:\Users\LUN\Desktop\Demos\Test.csv";
+        string filePath = @"C:\Users\tankw\OneDrive\Desktop\School\NP\Internship\Test.csv";
 
         //Constructor
         public OperationsStaffDAL()
@@ -113,8 +113,10 @@ namespace FOMOWizard.DAL
                         Schemes = row["Schemes"].ToString(),
                         MerchantType = row["MerchantType"].ToString(),
                         SGQRID = row["SGQRID"].ToString(),
-                        SGQRVersion = row["SGQRVer"].ToString()
-
+                        SGQRVersion = row["SGQRVer"].ToString(),
+                        DeploymentPhoto = row["DeploymentPhoto"].ToString(),
+                        PhotoBefore = row["PhotoBefore"].ToString(),
+                        PhotoAfter = row["PhotoAfter"].ToString(),
                     }
                 );
             }

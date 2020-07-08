@@ -15,6 +15,9 @@ namespace FOMOWizard.Models
         public string MerchantType { get; set; }
         public string SGQRID { get; set; }
         public string SGQRVer { get; set; }
+        public string DeploymentPhoto { get; set; }
+        public string PhotoBefore { get; set; }
+        public string PhotoAfter { get; set; }
 
         public List<ViewDeployment> deploymentinfo { get; set; }
     }

@@ -72,7 +72,7 @@ namespace FOMOWizard.Controllers
             {
                 return RedirectToAction("Index");
             }
-
+    
             Deployment deployment = staffContext.GetDetails(id);
             if (deployment == null)
             { 

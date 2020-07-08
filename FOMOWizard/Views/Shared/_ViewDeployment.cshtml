@@ -14,6 +14,10 @@
                     <th>MerchantType</th>
                     <th>SGQRID</th>
                     <th>SGQRVer</th>
+                    <th>DeploymentPhoto</th>
+                    <th>PhotoBefore</th>
+                    <th>PhotoAfter</th>
+
                     <th></th>
                 </tr>
             </thead>
@@ -29,6 +33,9 @@
                     <td>@item.MerchantType</td>
                     <td>@item.SGQRID</td>
                     <td>@item.SGQRVersion</td>
+                    <td>@item.DeploymentPhoto</td>
+                    <td>@item.PhotoBefore</td>
+                    <td>@item.PhotoAfter</td>
                     <td><a asp-action="Edit" asp-controller="OperationsStaff" asp-route-id="@item.DeploymentID">Edit</a></td>
                 </tr>
                 }
