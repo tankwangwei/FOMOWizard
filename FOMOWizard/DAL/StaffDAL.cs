@@ -162,49 +162,31 @@ namespace FOMOWizard.DAL
             //Close the database connection 
             conn.Close();
 
-            /*Deployment deployment = new Deployment() { };
-            foreach (DataRow row in result.Tables["DeploymentDetails"].Rows)
-            {
-                deployment = new Deployment
-                {
-                    DeploymentID = Convert.ToInt32(row["DeploymentID"]),
-                    DeploymentType = row["DeploymentType"].ToString(),
-                    MID = row["MID"].ToString(),
-                    TID = row["TID"].ToString(),
-                    Schemes = Convert.ToString(row["Schemes"]),
-                    MerchantType = Convert.ToString(row["MerchantType"]),
-                    SGQRID = row["MID"].ToString(),
-                    SGQRVersion = row["SGQRVer"].ToString(),
-                };
-            }
-            return deployment;*/
-
             Deployment deployment = new Deployment(); if (result.Tables["DeploymentDetails"].Rows.Count > 0)
             {
                 deployment.DeploymentID = deploymentId;
                 // Fill staff object with values from the DataSet 
                 DataTable table = result.Tables["DeploymentDetails"];
-                if (!DBNull.Value.Equals(table.Rows[0]["DeploymentType"]))
-                    deployment.DeploymentType = table.Rows[0]["DeploymentType"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["MID"]))
-                    deployment.MID = table.Rows[0]["MID"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["TID"]))
-                    deployment.TID = table.Rows[0]["TID"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["Schemes"]))
-                    deployment.Schemes = table.Rows[0]["Schemes"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["MerchantType"]))
-                    deployment.MerchantType = table.Rows[0]["MerchantType"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["SGQRID"]))
-                    deployment.SGQRID = table.Rows[0]["SGQRID"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["SGQRVer"]))
-                    deployment.SGQRVersion = table.Rows[0]["SGQRVer"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["DeploymentPhoto"]))
-                    deployment.SGQRVersion = table.Rows[0]["DeploymentPhoto"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["PhotoBefore"]))
-                    deployment.SGQRVersion = table.Rows[0]["PhotoBefore"].ToString();
-                if (!DBNull.Value.Equals(table.Rows[0]["PhotoAfter"]))
-                    deployment.SGQRVersion = table.Rows[0]["PhotoAfter"].ToString();
-
+                if (!DBNull.Value.Equals(table.Rows[deploymentId-1]["DeploymentType"]))
+                    deployment.DeploymentType = table.Rows[deploymentId - 1]["DeploymentType"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["MID"]))
+                    deployment.MID = table.Rows[deploymentId - 1]["MID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["TID"]))
+                    deployment.TID = table.Rows[deploymentId - 1]["TID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["Schemes"]))
+                    deployment.Schemes = table.Rows[deploymentId - 1]["Schemes"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["MerchantType"]))
+                    deployment.MerchantType = table.Rows[deploymentId - 1]["MerchantType"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["SGQRID"]))
+                    deployment.SGQRID = table.Rows[deploymentId - 1]["SGQRID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["SGQRVer"]))
+                    deployment.SGQRVersion = table.Rows[deploymentId - 1]["SGQRVer"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["DeploymentPhoto"]))
+                    deployment.DeploymentPhoto = table.Rows[deploymentId - 1]["DeploymentPhoto"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["PhotoBefore"]))
+                    deployment.PhotoBefore = table.Rows[deploymentId - 1]["PhotoBefore"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["PhotoAfter"]))
+                    deployment.PhotoAfter = table.Rows[deploymentId - 1]["PhotoAfter"].ToString();
                 return deployment;  // No error occurs 
             }
             else
