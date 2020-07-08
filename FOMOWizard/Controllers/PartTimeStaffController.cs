@@ -50,7 +50,7 @@ namespace FOMOWizard.Controllers
         public ActionResult Create()
         {
             if ((HttpContext.Session.GetString("Role") == null) ||
-                (HttpContext.Session.GetString("Role") != "Staff"))
+                (HttpContext.Session.GetString("Role") != "Part-timer"))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -71,7 +71,7 @@ namespace FOMOWizard.Controllers
             {
                 deployment.DeploymentID = staffContext.Add(deployment);
 
-                return RedirectToAction("Create", "OperationsStaff");
+                return RedirectToAction("Create", "PartTimeStaff");
             }
             else
             {

@@ -195,5 +195,28 @@ namespace FOMOWizard.DAL
                 return null;
             }
         }
+
+        public int Update(Deployment deployment)
+        {
+            //Instantiate a SqlCommand object, supply it with SQL statement UPDATE //and the connection object for connecting to the database. 
+            SqlCommand cmd = new SqlCommand("UPDATE Deployment SET MID=@mid, TID=@tid, SGQRID=@sgqrid, SGQRVer=@sgqrver" + " WHERE DeploymentID = @selectedDeploymentID", conn);
+
+            //Define the parameters used in SQL statement, value for each parameter //is retrieved from the respective property of “staff” object. 
+            cmd.Parameters.AddWithValue("@mid", deployment.MID);
+            cmd.Parameters.AddWithValue("@tid", deployment.TID);
+            cmd.Parameters.AddWithValue("@sgqrid", deployment.SGQRID);
+            cmd.Parameters.AddWithValue("@sgqrver", deployment.SGQRVersion);
+
+            cmd.Parameters.AddWithValue("@selectedDeploymentID", deployment.DeploymentID);
+
+            //Open a database connection. 
+            conn.Open();
+            //ExecuteNonQuery is used for UPDATE and DELETE 
+            int count = cmd.ExecuteNonQuery();
+            //Close the database connection. 
+            conn.Close();
+
+            return count;
+        }
     }
 }

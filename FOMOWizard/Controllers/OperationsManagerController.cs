@@ -62,6 +62,39 @@ namespace FOMOWizard.Controllers
             }
         }
 
+        public ActionResult Edit(int id)
+        {
+            if ((HttpContext.Session.GetString("Role") == null) ||
+                (HttpContext.Session.GetString("Role") != "Manager"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            Deployment deployment = staffContext.GetDetails(id);
+            if (deployment == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(deployment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Deployment deployment)
+        {
+            if (ModelState.IsValid)
+            {
+                mngContext.Update(deployment);
+                return RedirectToAction("Edit");
+            }
+
+            return View(deployment);
+        }
+
         public ActionResult ViewStaff()
         {
             if ((HttpContext.Session.GetString("Role") == null) ||

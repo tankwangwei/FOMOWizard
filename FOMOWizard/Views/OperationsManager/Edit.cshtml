@@ -1,0 +1,58 @@
+﻿@model FOMOWizard.Models.Deployment
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Deployment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="DeploymentID" class="control-label"></label>
+                <input asp-for="DeploymentID" readonly class="form-control-plaintext" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DeploymentType" class="control-label"></label>
+                <input asp-for="DeploymentType" readonly class="form-control-plaintext" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MID" class="control-label"></label>
+                <input asp-for="MID" class="form-control" />
+                <span asp-validation-for="MID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TID" class="control-label"></label>
+                <input asp-for="TID" class="form-control" />
+                <span asp-validation-for="TID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Schemes" class="control-label"></label>
+                <input asp-for="Schemes" readonly class="form-control-plaintext" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MerchantType" class="control-label"></label>
+                <input asp-for="MerchantType" readonly class="form-control-plaintext" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SGQRID" class="control-label"></label>
+                <input asp-for="SGQRID" class="form-control" />
+                <span asp-validation-for="SGQRID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SGQRVersion" class="control-label"></label>
+                <input asp-for="SGQRVersion" class="form-control" />
+                <span asp-validation-for="SGQRVersion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
