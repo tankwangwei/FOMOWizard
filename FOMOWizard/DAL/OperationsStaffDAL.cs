@@ -121,6 +121,60 @@ namespace FOMOWizard.DAL
             return deploymentList;
         }
 
+        public Deployment GetDetails(int deploymentId)
+        {
+            //Instantiate a SqlCommand object, supply it with a 
+            //SELECT SQL statement that operates against the database, 
+            //and the connection object for connecting to the database. 
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Deployment ORDER BY DeploymentID", conn);
+            //Instantiate a DataAdapter object and pass the     
+            //SqlCommand object created as parameter. 
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //Create a DataSet object to contain records get from database 
+            DataSet result = new DataSet();
+
+            //Open a database connection 
+            conn.Open();
+            //Use DataAdapter, which execute the SELECT SQL through its 
+            //SqlCommand object to fetch data to a table "StaffDetails" 
+            //in DataSet "result". 
+            da.Fill(result, "DeploymentDetails");
+            //Close the database connection 
+            conn.Close();
+
+            Deployment deployment = new Deployment(); if (result.Tables["DeploymentDetails"].Rows.Count > 0)
+            {
+                deployment.DeploymentID = deploymentId;
+                // Fill staff object with values from the DataSet 
+                DataTable table = result.Tables["DeploymentDetails"];
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["DeploymentType"]))
+                    deployment.DeploymentType = table.Rows[deploymentId - 1]["DeploymentType"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["MID"]))
+                    deployment.MID = table.Rows[deploymentId - 1]["MID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["TID"]))
+                    deployment.TID = table.Rows[deploymentId - 1]["TID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["Schemes"]))
+                    deployment.Schemes = table.Rows[deploymentId - 1]["Schemes"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["MerchantType"]))
+                    deployment.MerchantType = table.Rows[deploymentId - 1]["MerchantType"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["SGQRID"]))
+                    deployment.SGQRID = table.Rows[deploymentId - 1]["SGQRID"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["SGQRVer"]))
+                    deployment.SGQRVersion = table.Rows[deploymentId - 1]["SGQRVer"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["DeploymentPhoto"]))
+                    deployment.DeploymentPhoto = table.Rows[deploymentId - 1]["DeploymentPhoto"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["PhotoBefore"]))
+                    deployment.PhotoBefore = table.Rows[deploymentId - 1]["PhotoBefore"].ToString();
+                if (!DBNull.Value.Equals(table.Rows[deploymentId - 1]["PhotoAfter"]))
+                    deployment.PhotoAfter = table.Rows[deploymentId - 1]["PhotoAfter"].ToString();
+                return deployment;  // No error occurs 
+            }
+            else
+            {
+                return null; // Record not found 
+            }
+        }
+
         //Gets All name on label
         public List<string> getNameOnLabel()
         {
