@@ -63,8 +63,7 @@ namespace FOMOWizard.Controllers
         
         public ActionResult Edit(int id)
         {
-            if ((HttpContext.Session.GetString("Role") == null) || 
-                (HttpContext.Session.GetString("Role") != "Staff"))
+            if (HttpContext.Session.GetString("Role") == "Part-timer")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -72,7 +71,7 @@ namespace FOMOWizard.Controllers
             {
                 return RedirectToAction("Index");
             }
-
+    
             Deployment deployment = staffContext.GetDetails(id);
             if (deployment == null)
             { 
@@ -97,8 +96,7 @@ namespace FOMOWizard.Controllers
 
         public ActionResult ViewDeployment()
         {
-            if ((HttpContext.Session.GetString("Role") == null) ||
-                (HttpContext.Session.GetString("Role") != "Staff"))
+            if (HttpContext.Session.GetString("Role") == "Part-timer")
             {
                 return RedirectToAction("Index", "Home");
             }
