@@ -111,8 +111,7 @@ namespace FOMOWizard.Controllers
 
         public ActionResult ViewDeployment()
         {
-            if ((HttpContext.Session.GetString("Role") == null) ||
-                (HttpContext.Session.GetString("Role") != "Manager"))
+            if (HttpContext.Session.GetString("Role") == "Part-timer")
             {
                 return RedirectToAction("Index", "Home");
             }
