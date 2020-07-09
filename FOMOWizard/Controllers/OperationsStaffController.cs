@@ -121,6 +121,16 @@ namespace FOMOWizard.Controllers
             return View(payloads);
         }
 
+        public ActionResult FindLocation()
+        {
+            if ((HttpContext.Session.GetString("Role") == null) ||
+                (HttpContext.Session.GetString("Role") != "Staff"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
 
         private List<SelectListItem> GetDeploymentType()
         {
@@ -141,29 +151,5 @@ namespace FOMOWizard.Controllers
 
             return merchanttype;
         }
-
-        //public async Task<IActionResult> Index(string sortOrder)
-        //{
-        //    ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-        //    //ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-        //    var payloads = from s in staffContext.GetPayloads()
-        //                   select s;
-        //    switch (sortOrder)
-        //    {
-        //        case "name_desc":
-        //            payloads = payloads.OrderByDescending(s => s.LastName);
-        //            break;
-        //        case "Date":
-        //            payloads = payloads.OrderBy(s => s.EnrollmentDate);
-        //            break;
-        //        case "date_desc":
-        //            payloads = payloads.OrderByDescending(s => s.EnrollmentDate);
-        //            break;
-        //        default:
-        //            payloads = payloads.OrderBy(s => s.LastName);
-        //            break;
-        //    }
-        //    return View(await payloads.AsNoTracking().ToListAsync());
-        //}
     }
 }

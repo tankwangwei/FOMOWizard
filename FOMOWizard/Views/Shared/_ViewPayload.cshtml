@@ -63,11 +63,8 @@
                     <th>UEN</th>
                     <th>MID</th>
                     <th>TID</th>
-                    <th>MISC</th>
                     <th>CO. NAME</th>
                     <th>SGQR ID</th>
-                    <th>Service Type</th>
-                    <th>Deployment Type</th>
                     <th>C. Person</th>
                     <th>C. No.</th>
                 </tr>
@@ -75,17 +72,17 @@
             <tbody id="payloadTableContents">
                 @foreach (var payload in Model)
                 {
-                <tr id="myTR">
-                    <td><a>NULL</a></td>
-                    <td><a>@payload.UEN</a></td>
-                    <td><a>@payload.MID</a></td>
-                    <td><a>@payload.TID</a></td>
-                    <td><a>@payload.NameOnLabel</a></td>
-                    <td><a>@payload.SGQRID</a></td>
-                    <td><a>@payload.ContactPerson</a></td>
-                    <td><a>@payload.ContactNo</a></td>
+                    <tr id="myTR">
+                        <td><a>@payload.Location</a></td>
+                        <td><a>@payload.UEN</a></td>
+                        <td><a>@payload.MID</a></td>
+                        <td><a>@payload.TID</a></td>
+                        <td><a>@payload.NameOnLabel</a></td>
+                        <td><a>@payload.SGQRID</a></td>
+                        <td><a>@payload.ContactPerson</a></td>
+                        <td><a>@payload.ContactNo</a></td>
 
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>

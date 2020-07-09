@@ -5,6 +5,10 @@
 }
 
 <h2>View Staff</h2>
+
+@*Button to add staff*@
+<a class="btn btn-success" asp-action="CreateStaff" asp-controller="OperationsManager">Add Staff</a>
+
 @if (Model.ToList().Count > 0)
 {
     <div class="table-responsive">

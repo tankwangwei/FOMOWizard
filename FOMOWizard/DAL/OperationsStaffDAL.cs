@@ -17,7 +17,7 @@ namespace FOMOWizard.DAL
         private SqlConnection conn;
 
         //Path of file
-        string filePath = @"C:\Users\LUN\Desktop\Demos\Test.csv";
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\FullPayload\Full_Payload.csv");
 
         //Constructor
         public OperationsStaffDAL()
@@ -121,36 +121,6 @@ namespace FOMOWizard.DAL
             return deploymentList;
         }
 
-        //This function retreive all the payloads
-        public List<Payload> GetPayloadsByRecentMonth()
-        {
-            List<Payload> allPayloads = new List<Payload>();
-            List<string> lines = File.ReadAllLines(filePath).ToList();
-
-            //Skip header
-            lines = lines.Skip(1).ToList();
-
-            foreach (var line in lines)
-            {
-                string[] entries = line.Split(',');
-                Payload payload = new Payload();
-
-                payload.ID = Int32.Parse(entries[0]);
-                payload.UEN = entries[2];
-                payload.RegisteredName = entries[3];
-                payload.MID = entries[6];
-                payload.TID = entries[8];
-                
-                //newPayload.DateAdded = entries[17];
-
-                allPayloads.Add(payload);
-            }
-
-            var distinctPayloads = allPayloads.Distinct(new DistinctPayloadComparer()).ToList();
-
-            return distinctPayloads;
-        }
-
         //Gets All name on label
         public List<string> getNameOnLabel()
         {
@@ -169,43 +139,66 @@ namespace FOMOWizard.DAL
             return namesOnLabel;
         }
 
-        //This function filter payloads by the Month
         public List<Payload> GetMonthlyPayloads()
         {
             List<Payload> payloadsByMonth = new List<Payload>();
-            List<string> lines = File.ReadAllLines(filePath).ToList();
-
-            //Skip header
-            lines = lines.Skip(1).ToList();
-
-            foreach (var line in lines)
+            if (File.Exists(filePath))
             {
-                string[] entries = line.Split(',');
-                Payload payload = new Payload();
+                List<string> lines = File.ReadAllLines(filePath).ToList();
 
-                if (entries[17].Length >= 10)
+                //Get current year
+                string currentYear = DateTime.Now.Year.ToString();
+                //Get current month
+                string currentMonth = DateTime.Now.Month.ToString("d2");
+                //Combines the string
+                string currentYearMonth = currentYear + "-" + currentMonth;
+
+                //Skip header
+                lines = lines.Skip(1).ToList();
+
+                foreach (var line in lines)
                 {
-                    string monthlyExtract = entries[17].Substring(0, 7);
+                    string[] entries = line.Split(',');
+                    Payload payload = new Payload();
 
-                    if (monthlyExtract.Contains("2020-06"))
+                    if (entries[17].Length >= 10)
                     {
-                        payload.ID = Int32.Parse(entries[0]);
-                        payload.UEN = entries[2];
-                        payload.MID = entries[6];
-                        payload.TID = entries[8];
-                        payload.NameOnLabel = entries[7];
-                        payload.SGQRID = entries[13];
-                        payload.ContactPerson = entries[21];
-                        payload.ContactNo = entries[22];
+                        string dateExtract = entries[17].Substring(0, 7);
 
-                        payloadsByMonth.Add(payload);
+                        if (dateExtract.Contains(currentYearMonth))
+                        {
+                            payload.ID = Int32.Parse(entries[0]);
+
+                            payload.Location = entries[9] + " " + entries[10] + " " + entries[11];
+                            payload.UEN = entries[2];
+                            payload.MID = entries[6];
+                            payload.TID = entries[8];
+                            payload.NameOnLabel = entries[7];
+                            if (entries[13] == "")
+                            {
+                                payload.SGQRID = "Empty SGQR";
+                                payload.ContactPerson = entries[22];
+                                payload.ContactNo = entries[23];
+                            }
+                            else
+                            {
+                                payload.SGQRID = entries[13];
+                                payload.ContactPerson = entries[21];
+                                payload.ContactNo = entries[22];
+                            }
+
+                            payloadsByMonth.Add(payload);
+                        }
                     }
                 }
+
+                var distinctPayloads = payloadsByMonth.Distinct(new DistinctPayloadComparer()).ToList();
+
+                return distinctPayloads;
             }
 
-            var distinctPayloads = payloadsByMonth.Distinct(new DistinctPayloadComparer()).ToList();
-
             return payloadsByMonth;
+            
         }
 
         public List<Payload> SortPayloadByDesc()

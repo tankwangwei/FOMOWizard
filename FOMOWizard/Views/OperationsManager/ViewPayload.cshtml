@@ -3,5 +3,6 @@
     ViewData["Title"] = "ViewPayload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<a class="btn btn-success" asp-action="UploadPayload" asp-controller="OperationsManager">Upload</a>
+<a class="btn btn-info" asp-action="FindLocation" asp-controller="OperationsManager">Map</a>
 <partial name="~/Views/Shared/_ViewPayload.cshtml" model="@Model">

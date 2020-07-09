@@ -1,12 +1,5 @@
-﻿<form method="post" enctype="multipart/form-data" asp-controller="OperationsManager" asp-action="UploadPayload">
-    <div class="form-group">
-        <div class="col-md-10">
-            <p>Upload Payload</p>
-            <input type="file" name="files"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Upload" />
-    </div>
-</form>
-
+﻿@{
+    ViewData["Title"] = "ViewDeployment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<partial name="~/Views/OperationsManager/_UploadPayload.cshtml" model="@Model">

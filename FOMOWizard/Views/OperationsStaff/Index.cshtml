@@ -14,7 +14,7 @@
         <div class="col-sm-6 col-lg-3 btn1">
             <div class="row">
                 <a href="~/OperationsStaff/Create" class="col-sm-12" style="text-align: center;">
-                    <i class="fas fa-file-upload"></i>
+                    <img src="~/Assets/UploadDeploymentIcon.png" />
                 </a>
                 <p class="col-sm-12" style="text-align: center;">Upload</p>
             </div>
@@ -22,7 +22,7 @@
         <div class="col-sm-6 col-lg-3 btn2">
             <div class="row">
                 <a href="~/OperationsStaff/ViewDeployment" class="col-sm-12" style="text-align: center;">
-                    <i class="fas fa-table"></i>
+                    <img src="~/Assets/DeploymentIcon.png" />
                 </a>
                 <p class="col-sm-12" style="text-align: center;">View Deployments</p>
             </div>
@@ -30,7 +30,7 @@
         <div class="col-sm-6 col-lg-3 btn3">
             <div class="row">
                 <a href="~/OperationsStaff/ViewPayload" class="col-sm-12" style="text-align: center;">
-                    <i class="fas fa-font"></i>
+                    <img src="~/Assets/PayloadIcon.png"/>
                 </a>
                 <p class="col-sm-12" style="text-align: center;">Payload</p>
             </div>
@@ -38,23 +38,7 @@
     </div>
     <div id="map" style="width: 500px; height: 500px"></div>
 
-    <script>
-        var map;
-        function initMap() {
-            var fomoCoords = { lat: 1.2789, lng: 103.8485 };
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: fomoCoords,
-                zoom: 15
-            });
-            var marker = new google.maps.Marker({
-                position: fomoCoords,
-                map: map
-            });
-        }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB14-3qDRxNzqGy7SXV2KpD4pPINkXpHg&callback=initMap">
-    </script>
+    
 
 </body>
 </html>

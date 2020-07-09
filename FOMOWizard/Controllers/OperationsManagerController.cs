@@ -129,6 +129,7 @@ namespace FOMOWizard.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadPayload(List<IFormFile> files)
         {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\FullPayload", "Full_Payload.csv");
             var size = files.Sum(f => f.Length);
 
             var filePaths = new List<string>();
@@ -136,16 +137,40 @@ namespace FOMOWizard.Controllers
             {
                 if (formFile.Length > 0)
                 {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\FullPayload", formFile.FileName);
-                    filePaths.Add(filePath);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    if (System.IO.File.Exists(filePath))
                     {
-                        await formFile.CopyToAsync(stream);
+                        System.IO.File.Delete(filePath);
+
+                        filePaths.Add(filePath);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
                     }
+                    else
+                    {
+                        filePaths.Add(filePath);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
+                    }
+                    
                 }
             }
 
+            return View();
+        }
+
+        public ActionResult FindLocation()
+        {
+            if ((HttpContext.Session.GetString("Role") == null) ||
+                (HttpContext.Session.GetString("Role") != "Manager"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 

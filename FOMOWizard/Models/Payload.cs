@@ -17,5 +17,6 @@ namespace FOMOWizard.Models
         public string ContactPerson { get; set; }
         public string ContactNo { get; set; }
         public string DateAdded { get; set; }
+        public string Location { get; set; }
     }
 }
